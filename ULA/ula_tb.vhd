@@ -35,6 +35,7 @@ begin
         operation <= "00";
         wait for 50 ns;
         operation <= "01";
+        wait for 50 ns;
         wait;
     end process;
 end architecture;
