@@ -30,11 +30,16 @@ begin
     );
     process
     begin
-        in_a <= "1010101010101010";
-        in_b <= "0101010101010101";
+        in_a <= "0000000000001000";
+        in_b <= "0000000000000100";
+        wait for 50 ns;
         operation <= "00";
         wait for 50 ns;
         operation <= "01";
+        wait for 50 ns;
+        operation <= "10";
+        wait for 50 ns;
+        operation<="11";
         wait for 50 ns;
         wait;
     end process;
