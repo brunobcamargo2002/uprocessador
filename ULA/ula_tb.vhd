@@ -30,8 +30,8 @@ begin
     );
     process
     begin
-        in_a <= "0000000000001000";
-        in_b <= "0000000000000100";
+        in_a <= "0000000000001010";
+        in_b <= "0000000000000110";
         wait for 50 ns;
         operation <= "00";
         wait for 50 ns;
