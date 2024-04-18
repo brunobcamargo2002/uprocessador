@@ -41,6 +41,17 @@ begin
         wait for 50 ns;
         operation<="11";
         wait for 50 ns;
+        in_a <= "0000100000001010"
+        in_b <= "0011100000000010"
+        wait for 50 ns;
+        operation <= "00";
+        wait for 50 ns;
+        operation <= "01";
+        wait for 50 ns;
+        operation <= "10";
+        wait for 50 ns;
+        operation<="11";
+        wait for 50 ns;
         wait;
     end process;
 end architecture;
