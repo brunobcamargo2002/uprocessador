@@ -1,19 +1,19 @@
 v 4
-file . "xor_op.vhd" "6e1524cb022bc69d5ffaa5567de6aec38f1d51cd" "20240416023554.920":
-  entity xor_op at 1( 0) + 0 on 57;
-  architecture a_xor_op of xor_op at 14( 256) + 0 on 58;
-file . "ula_tb.vhd" "339e2a21b0f9728429d38f7460e09b553763a2a1" "20240416023554.951":
-  entity ula_tb at 1( 0) + 0 on 59;
-  architecture a_ula_tb of ula_tb at 8( 107) + 0 on 60;
-file . "multiplicator.vhd" "8e7ab465cf51b6e122749666a55daea716de7e68" "20240416023554.856":
-  entity multiplicator at 1( 0) + 0 on 53;
-  architecture a_multiplicator of multiplicator at 13( 262) + 0 on 54;
-file . "adder.vhd" "9ff067eb39e6e76dbf4eb259dd38ceced3d3fb06" "20240416023554.826":
-  entity adder at 1( 0) + 0 on 51;
-  architecture a_adder of adder at 13( 255) + 0 on 52;
-file . "subtracter.vhd" "c8024f27465cc706ce6a17b9f54f1dc43b0405a8" "20240416023554.889":
-  entity subtracter at 1( 0) + 0 on 55;
-  architecture a_subtracter of subtracter at 13( 260) + 0 on 56;
-file . "ula.vhd" "d4c75ee6f800795fe2df2a1e353c9dedc77ce4fe" "20240416023554.788":
-  entity ula at 1( 0) + 0 on 49;
-  architecture a_ula of ula at 15( 331) + 0 on 50;
+file . "xor_op.vhd" "6e1524cb022bc69d5ffaa5567de6aec38f1d51cd" "20240416024154.915":
+  entity xor_op at 1( 0) + 0 on 81;
+  architecture a_xor_op of xor_op at 14( 256) + 0 on 82;
+file . "ula_tb.vhd" "339e2a21b0f9728429d38f7460e09b553763a2a1" "20240416024154.946":
+  entity ula_tb at 1( 0) + 0 on 83;
+  architecture a_ula_tb of ula_tb at 8( 107) + 0 on 84;
+file . "multiplicator.vhd" "8e7ab465cf51b6e122749666a55daea716de7e68" "20240416024154.831":
+  entity multiplicator at 1( 0) + 0 on 77;
+  architecture a_multiplicator of multiplicator at 13( 262) + 0 on 78;
+file . "adder.vhd" "9ff067eb39e6e76dbf4eb259dd38ceced3d3fb06" "20240416024154.802":
+  entity adder at 1( 0) + 0 on 75;
+  architecture a_adder of adder at 13( 255) + 0 on 76;
+file . "subtracter.vhd" "c8024f27465cc706ce6a17b9f54f1dc43b0405a8" "20240416024154.868":
+  entity subtracter at 1( 0) + 0 on 79;
+  architecture a_subtracter of subtracter at 13( 260) + 0 on 80;
+file . "ula.vhd" "d4c75ee6f800795fe2df2a1e353c9dedc77ce4fe" "20240416024154.758":
+  entity ula at 1( 0) + 0 on 73;
+  architecture a_ula of ula at 15( 331) + 0 on 74;
