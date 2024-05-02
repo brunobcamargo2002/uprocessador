@@ -26,8 +26,10 @@ component registrator_16 is
         data_out: out unsigned(15 downto 0)
     );
 end component;
+
 signal reg0_out, reg1_out, reg2_out, reg3_out, reg4_out, reg5_out, reg6_out, reg7_out: unsigned(15 downto 0);
-signal reg0_in, reg1_in, reg2_in, reg3_in, reg4_in, reg5_in, reg6_in, reg7_in: unsigned(15 downto 0);
+signal reg0_in: unsigned(15 downto 0) := "0000000000000000";
+signal reg1_in, reg2_in, reg3_in, reg4_in, reg5_in, reg6_in, reg7_in: unsigned(15 downto 0);
 signal write_enable0, write_enable1, write_enable2, write_enable3, write_enable4, write_enable5, write_enable6, write_enable7 : std_logic;
 
 begin 
@@ -70,7 +72,6 @@ begin
                 reg7_out when read_r1 = "111" else
                 "0000000000000000";
             
-            reg0_in <= write_data;
             reg1_in <= write_data;
             reg2_in <= write_data;
             reg3_in <= write_data;

@@ -1,0 +1,25 @@
+v 4
+file . "Register_Bank/reg_bd.vhd" "4b3e86a5e3c094911fae88d3ff4023a9cd16032a" "20240502025205.201":
+  entity reg_bd at 1( 0) + 0 on 949;
+  architecture a_reg_bd of reg_bd at 19( 498) + 0 on 950;
+file . "ULA/xor_op.vhd" "6e1524cb022bc69d5ffaa5567de6aec38f1d51cd" "20240502025204.607":
+  entity xor_op at 1( 0) + 0 on 945;
+  architecture a_xor_op of xor_op at 14( 256) + 0 on 946;
+file . "ULA/and_op.vhd" "70998b379e3601998aae7e87fafa29a02a9da2ad" "20240502025204.476":
+  entity and_op at 1( 0) + 0 on 941;
+  architecture a_and_op of and_op at 13( 255) + 0 on 942;
+file . "ULA/ula.vhd" "83a68379a9f70ee0afcfe73ee4beefe471dc9675" "20240502025204.350":
+  entity ula at 1( 0) + 0 on 937;
+  architecture a_ula of ula at 15( 331) + 0 on 938;
+file . "uprocessor.vhd" "f9087c7455df7f94549196cc45dffff6a4e1c51c" "20240502025204.210":
+  entity uprocessor at 1( 0) + 0 on 935;
+  architecture a_uprocessor of uprocessor at 8( 111) + 0 on 936;
+file . "ULA/adder.vhd" "9ff067eb39e6e76dbf4eb259dd38ceced3d3fb06" "20240502025204.414":
+  entity adder at 1( 0) + 0 on 939;
+  architecture a_adder of adder at 13( 255) + 0 on 940;
+file . "ULA/subtracter.vhd" "c8024f27465cc706ce6a17b9f54f1dc43b0405a8" "20240502025204.542":
+  entity subtracter at 1( 0) + 0 on 943;
+  architecture a_subtracter of subtracter at 13( 260) + 0 on 944;
+file . "Register_Bank/registrator_16.vhd" "7301e1fc1cbf47b9c19a83eadec5d42044a6f540" "20240502025205.110":
+  entity registrator_16 at 1( 0) + 0 on 947;
+  architecture a_registrator_16 of registrator_16 at 15( 310) + 0 on 948;
