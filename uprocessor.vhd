@@ -89,38 +89,38 @@ begin
          --addi beg5, zero, 5
         wait for 200 ns;
         write_enable <= '0';
-        wait for 50 ns;
+        wait for 100 ns;
         read_0 <="000";
         mux_2 <= '1';
         cte <= "0000000000000101";
         operation <= "00";
         write_register <= "101";
-        wait for 50 ns;
+        wait for 100 ns;
         write_enable <= '1';
         
 
          --addi reg3, beg5, 7
-         wait for 50 ns;
+         wait for 100 ns;
          write_enable <= '0';
-         wait for 50 ns;
+         wait for 100 ns;
          read_0 <="101";
          mux_2 <= '1';
          cte <= "0000000000000111";
          operation <= "00";
          write_register <= "100";
-         wait for 50 ns;
+         wait for 100 ns;
          write_enable <= '1';
 
         --sub reg7, reg3, beg5
-         wait for 50 ns;
+         wait for 100 ns;
          write_enable <= '0';
-         wait for 50 ns;
+         wait for 100 ns;
          read_0 <="101";
          read_1 <="100";
          mux_2 <= '0';
          operation <= "01";
          write_register <= "111";
-         wait for 50 ns;
+         wait for 100 ns;
          write_enable <= '1';
          wait;
        end process;
