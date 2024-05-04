@@ -11,13 +11,13 @@ architecture a_ula_tb of ula_tb is
             operation : in unsigned(1 downto 0);
             in_a : in unsigned(15 downto 0);
             in_b : in unsigned(15 downto 0);
-            saida : out unsigned(15 downto 0);
+            ALUout : out unsigned(15 downto 0);
             is_zero: out std_logic
         );
     end component;
 
     signal operation : unsigned(1 downto 0);
-    signal in_a, in_b, saida : unsigned(15 downto 0);
+    signal in_a, in_b, ALUout : unsigned(15 downto 0);
     signal is_zero : std_logic;
     
 begin 
@@ -25,7 +25,7 @@ begin
         operation => operation,
         in_a => in_a,
         in_b => in_b,
-        saida => saida,
+        ALUout => ALUout,
         is_zero => is_zero
     );
     process

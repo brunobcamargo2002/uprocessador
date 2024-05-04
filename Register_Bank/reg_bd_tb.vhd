@@ -10,7 +10,7 @@ architecture a_reg_bd_tb of reg_bd_tb is
         port (
             read_r0: in unsigned(2 downto 0);
             read_r1: in unsigned(2 downto 0);
-            write_enable: in std_logic;
+            wr_en: in std_logic;
             write_register: in unsigned(2 downto 0);
             write_data: in unsigned(15 downto 0);
             clk: in std_logic;
@@ -22,7 +22,7 @@ architecture a_reg_bd_tb of reg_bd_tb is
 
     signal read_r0: unsigned(2 downto 0) := "000";
     signal read_r1: unsigned(2 downto 0) := "000";
-    signal write_enable: std_logic := '0';
+    signal wr_en: std_logic := '0';
     signal write_register: unsigned(2 downto 0) := "000";
     signal write_data: unsigned(15 downto 0) := "0000000000000000";
     signal clk: std_logic := '0';
@@ -37,7 +37,7 @@ begin
     uut: reg_bd port map (
         read_r0 => read_r0,
         read_r1 => read_r1, 
-        write_enable => write_enable,
+        wr_en => wr_en,
         write_register => write_register,
         write_data => write_data,
         clk => clk,
@@ -71,12 +71,12 @@ begin
         wait for 200 ns;
         write_data <= "0000000000001000";
         write_register <= "011";
-        write_enable <= '1';
+        wr_en <= '1';
         wait for 100 ns;
         read_r0 <= "011";
         write_data <= "0000000000000001";
         write_register <= "001";
-        write_enable <= '0';
+        wr_en <= '0';
         wait for 100 ns;
         read_r0 <= "001";
         read_r1 <= "011";

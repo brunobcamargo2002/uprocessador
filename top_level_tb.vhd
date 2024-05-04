@@ -2,39 +2,27 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity uprocessor is
+entity top_level_tb is
 end entity;
 
-architecture a_uprocessor of uprocessor is
-    component ula
+architecture a_top_level_tb of top_level_tb is
+    
+    component top_level
         port (
-            operation : in unsigned(1 downto 0);
-            in_a : in unsigned(15 downto 0);
-            in_b : in unsigned(15 downto 0);
-            saida : out unsigned(15 downto 0);
-            is_zero: out std_logic
+            clk, rst: in std_logic;
+            operation: in unsigned (1 downto 0);
+            read_0, read_1, write_register: in unsigned(2 downto 0);
+            wr_en: in std_logic;
+            cte: in unsigned(15 downto 0);
+            mux_2: in std_logic;
+            ULA_out: out unsigned (15 downto 0);
+            zero_flag: out std_logic;
+            r0, r1, r2, r3, r4, r5, r6, r7: out unsigned(15 downto 0) 
         );
-    end component;
-
-    component reg_bd
-        port(
-            read_r0: in unsigned(2 downto 0);
-            read_r1: in unsigned(2 downto 0);
-            write_enable: in std_logic;
-            write_register: in unsigned(2 downto 0);
-            write_data: in unsigned(15 downto 0);
-            clk: in std_logic;
-            rst: in std_logic;
-            read_data0: out unsigned(15 downto 0); 
-            read_data1: out unsigned(15 downto 0)
-        );
-    end component;
-    
-    
-
+    end component; 
     --ULA
     signal operation : unsigned(1 downto 0);
-    signal in_a, in_b, saida : unsigned(15 downto 0);
+    signal in_a, in_b, ULAout : unsigned(15 downto 0);
     signal is_zero : std_logic;
 
     --Mux_2
@@ -43,16 +31,33 @@ architecture a_uprocessor of uprocessor is
     --Register Bank signals
     signal read_0, read_1, write_register: unsigned(2 downto 0);
     signal read_data1, cte: unsigned (15 downto 0);
-    signal write_enable: std_logic;
+    signal wr_en: std_logic;
 
     constant period_time : time      := 100 ns;
     signal   finished    : std_logic := '0';
     signal clk, rst: std_logic;
+
+    --WIRES--
+    signal ULA_out: unsigned (15 downto 0);
+    signal zero_flag: std_logic;
+    signal r0, r1, r2, r3, r4, r5, r6, r7: unsigned(15 downto 0) ;
     
 
 begin 
-    uut: ula port map ( operation => operation, in_a => in_a, in_b => in_b, saida => saida, is_zero => is_zero);
-    reg_b: reg_bd port map(read_r0 => read_0, read_r1 => read_1, write_register => write_register, write_data => saida, read_data0 => in_a, read_data1 => read_data1, clk => clk, rst => rst, write_enable => write_enable);
+    tp_lvl: top_level port map(clk => clk,
+    rst => rst,
+    operation => operation,
+    read_0 => read_0,
+    read_1 => read_1,
+    write_register => write_register,
+    wr_en => wr_en,
+    cte => cte,
+    mux_2 => mux_2,
+    ULA_out => ULA_out,
+    zero_flag => zero_flag,
+    r0 => r0, r1 => r1, r2 => r2, r3 => r3, 
+    r4 => r4, r5 => r5, r6 => r6, r7 => r7
+    );
 
     in_b <= read_data1 when mux_2='0' else cte;
     
@@ -88,7 +93,7 @@ begin
        begin
          --addi beg5, zero, 5
         wait for 200 ns;
-        write_enable <= '0';
+        wr_en <= '0';
         wait for 100 ns;
         read_0 <="000";
         mux_2 <= '1';
@@ -96,12 +101,12 @@ begin
         operation <= "00";
         write_register <= "101";
         wait for 100 ns;
-        write_enable <= '1';
+        wr_en <= '1';
         
 
          --addi reg3, beg5, 7
          wait for 100 ns;
-         write_enable <= '0';
+         wr_en <= '0';
          wait for 100 ns;
          read_0 <="101";
          mux_2 <= '1';
@@ -109,11 +114,11 @@ begin
          operation <= "00";
          write_register <= "100";
          wait for 100 ns;
-         write_enable <= '1';
+         wr_en <= '1';
 
         --sub reg7, reg3, beg5
          wait for 100 ns;
-         write_enable <= '0';
+         wr_en <= '0';
          wait for 100 ns;
          read_0 <="101";
          read_1 <="100";
@@ -121,7 +126,7 @@ begin
          operation <= "01";
          write_register <= "111";
          wait for 100 ns;
-         write_enable <= '1';
+         wr_en <= '1';
          wait;
        end process;
 

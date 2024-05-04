@@ -7,7 +7,7 @@ entity ula is
         operation : in unsigned(1 downto 0);
         in_a : in unsigned(15 downto 0);
         in_b : in unsigned(15 downto 0);
-        saida : out unsigned(15 downto 0);
+        ULAout : out unsigned(15 downto 0);
         is_zero: out std_logic
     );
 end entity;
@@ -53,7 +53,7 @@ begin
     --multiplicator1: multiplicator port map(in_a=>in_a, in_b=>in_b, result=>result_multiplicator);
     and_op1: and_op port map(in_a=>in_a, in_b=>in_b, result=>result_xor);
     xor_op1: xor_op port map(in_a=>in_a, in_b=>in_b, result=>result_xor);
-    saida <= result_adder when operation="00" else
+    ULAout <= result_adder when operation="00" else
              result_subtracter when operation="01" else
              result_and when operation="10" else
              result_xor when operation="11" else
