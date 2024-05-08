@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-ENTITY one_state_machine is 
+ENTITY registrator_16 is 
     port(
         clk: in std_logic;
         rst: in std_logic;
@@ -10,7 +10,7 @@ ENTITY one_state_machine is
     );
 end entity;
 
-architecture a_one_state_machine of one_state_machine is
+architecture a_registrator_16 of registrator_16 is
     signal estado: std_logic;
 begin
     
@@ -24,4 +24,3 @@ begin
     end process;
     data_out <= reg;    
 end architecture;
-
