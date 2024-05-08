@@ -1,10 +1,11 @@
-v 4
-file . "pc_tb.vhd" "b26b525b0f72d3cec412f1592a7096aa101628f0" "20240508200452.180":
-  entity pc_tb at 1( 0) + 0 on 27;
-  architecture a_registrator_16 of pc_tb at 8( 106) + 0 on 28;
+ 
+file . "control_proto_unit.vhd" "133c224a832d1bdbd08814b9dd524aab4238d69f" "20240508205107.791":
+  entity control_proto_unit at 1( 0) + 0 on 31;
+  architecture a_control_proto_unit of control_proto_unit at 13( 248) + 0 on 32;
 file . "../Register_Bank/registrator_16.vhd" "7301e1fc1cbf47b9c19a83eadec5d42044a6f540" "20240508180354.249":
   entity registrator_16 at 1( 0) + 0 on 11;
   architecture a_registrator_16 of registrator_16 at 15( 310) + 0 on 12;
-file . "control_proto_unit.vhd" "133c224a832d1bdbd08814b9dd524aab4238d69f" "20240508185228.683":
-  entity control_proto_unit at 1( 0) + 0 on 25;
-  architecture a_control_proto_unit of control_proto_unit at 13( 248) + 0 on 26;
+file . "pc_tb.vhd" "247bc13db27fcbe85fc67bc7e724340f6a3b5d70" "20240508205108.182":
+  entity pc_tb at 1( 0) + 0 on 33;
+  architecture a_registrator_16 of pc_tb at 8( 113) + 0 on 34;
+>>>>>>> fca142c812e65ad854c5e0420c582afcf91ef866
