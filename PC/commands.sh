@@ -6,4 +6,3 @@ ghdl -e pc_tb
 
 ghdl -r pc_tb --vcd=pc_tb.vcd
 gtkwave pc_tb.vcd
->>>>>>> fca142c812e65ad854c5e0420c582afcf91ef866

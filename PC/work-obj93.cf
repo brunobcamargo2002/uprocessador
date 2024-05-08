@@ -8,4 +8,3 @@ file . "../Register_Bank/registrator_16.vhd" "7301e1fc1cbf47b9c19a83eadec5d42044
 file . "pc_tb.vhd" "247bc13db27fcbe85fc67bc7e724340f6a3b5d70" "20240508205108.182":
   entity pc_tb at 1( 0) + 0 on 33;
   architecture a_registrator_16 of pc_tb at 8( 113) + 0 on 34;
->>>>>>> fca142c812e65ad854c5e0420c582afcf91ef866
