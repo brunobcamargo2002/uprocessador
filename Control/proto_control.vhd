@@ -41,12 +41,15 @@ architecture proto_control of proto_control is
     signal data_out_s, address_s: unsigned(6 downto 0);
     signal data_s: unsigned(15 downto 0);
     signal estado_s: std_logic;
+    
+    signal new_address: unsigned(6 downto 0):="0000000"; 
+
 begin
-    pc : registrator_7 port map(clk => clk, rst => rst, wr_en => '1', data_in => data_in, data_out => data_out_s);  
+    pc : registrator_7 port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => data_out_s);  
     rom_1 : rom port map(clk => clk, address => address_s, data => data_s);
     one_state_machine_1 : one_state_machine port map (clk => clk, rst => rst, estado => estado_s);
-    
-    data_in <= data_out_s+1 when estado_s = '1' else  data_out_s;
-    address_s <= data_out_s when is_branch = '0' else branch_address; 
+    new_address <= branch_address when is_branch = '1' else data_out_s+1;
+    data_in <= new_address when estado_s = '1' else data_out_s;
+    address_s <= data_out_s when estado_s = '0';
 
 end architecture;
