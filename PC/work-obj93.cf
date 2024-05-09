@@ -1,7 +1,0 @@
-v 4
-file . "one_state_machine_tb.vhd" "a788233789fc9ff8ca3b8877f793e83b1aac2506" "20240509003024.542":
-  entity one_state_machine_tb at 1( 0) + 0 on 17;
-  architecture a_one_state_machine_tb of one_state_machine_tb at 8( 114) + 0 on 18;
-file . "one_state_machine.vhd" "2e8f11176b7ab013380718d550749f616ca97052" "20240509003024.456":
-  entity one_state_machine at 1( 0) + 0 on 15;
-  architecture a_one_state_machine of one_state_machine at 13( 212) + 0 on 16;
