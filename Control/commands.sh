@@ -7,11 +7,14 @@
 ghdl -a one_state_machine.vhd
 ghdl -e one_state_machine
 
-ghdl -a one_state_machine_tb.vhd
-ghdl -e one_state_machine_tb
+ghdl -a rom.vhd
+ghdl -e rom
 
-ghdl -r one_state_machine_tb --wave=one_state_machine_tb.ghw
-gtkwave one_state_machine_tb.ghw
+ghdl -a proto_control.vhd
+ghdl -e proto_control
 
-#ghdl -r pc_tb --vcd=pc_tb.vcd
-#gtkwave pc_tb.vcd
+ghdl -a proto_control_tb.vhd
+ghdl -e proto_control_tb
+
+ghdl -r proto_control_tb --wave=proto_control_tb.ghw
+gtkwave proto_control_tb.ghw
