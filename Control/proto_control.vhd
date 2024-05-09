@@ -8,7 +8,7 @@ entity proto_control is
         wr_en: in std_logic;
         data_out: out unsigned(6 downto 0);
         is_branch: in std_logic;
-        branch_address: in unsigned(6 downto 0);
+        branch_address: in unsigned(6 downto 0)
     );
 end entity;
 
@@ -44,7 +44,7 @@ architecture proto_control of proto_control is
 begin
     pc : registrator_7 port map(clk => clk, rst => rst, wr_en => '1', data_in => data_in, data_out => data_out_s);  
     rom_1 : rom port map(clk => clk, address => address_s, data => data_s);
-    one_state_machine_1 : one_state_machine port map (clk => clk, rst => rst => estado => estado_s);
+    one_state_machine_1 : one_state_machine port map (clk => clk, rst => rst, => estado => estado_s);
     data_in <= data_out_s+1 when estado = '1' else data_out_s;
     data_out <= data_out_s;
     address_s <= data_out_s when is_branch = '0' else branch_address; 
