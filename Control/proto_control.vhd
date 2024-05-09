@@ -6,7 +6,9 @@ entity proto_control is
     port (
         clk, rst: in std_logic;
         wr_en: in std_logic;
-        data_out: out unsigned(6 downto 0)
+        data_out: out unsigned(6 downto 0);
+        is_branch: in std_logic;
+        branch_address: in unsigned(6 downto 0);
     );
 end entity;
 
@@ -45,6 +47,6 @@ begin
     one_state_machine_1 : one_state_machine port map (clk => clk, rst => rst => estado => estado_s);
     data_in <= data_out_s+1 when estado = '1' else data_out_s;
     data_out <= data_out_s;
-    address_s <= data_out_s; 
+    address_s <= data_out_s when is_branch = '0' else branch_address; 
 
 end architecture;
