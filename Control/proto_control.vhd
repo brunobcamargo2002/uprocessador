@@ -27,6 +27,13 @@ architecture proto_control of proto_control is
         data: out unsigned(15 downto 0)
         );
     end component;
+    component one_state_machine is
+        port (
+            clk : in std_logic;
+            rst : in std_logic;
+            estado : out std_logic
+        );
+    end component;
 
     signal data_in: unsigned(6 downto 0):= "0000000";
     signal data_out_s, address_s: unsigned(6 downto 0);
@@ -34,7 +41,7 @@ architecture proto_control of proto_control is
 begin
     pc : registrator_7 port map(clk => clk, rst => rst, wr_en => '1', data_in => data_in, data_out => data_out_s);  
     rom_1 : rom port map(clk => clk, address => address_s, data => data_s)
-    data_in <= data_out_s+1;
+    data_in <= data_out_s+1 when estado = '1' else data_out_s;
     data_out <= data_out_s;
     address_s <= data_out_s; 
 
