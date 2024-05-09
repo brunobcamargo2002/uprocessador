@@ -61,6 +61,7 @@ begin
         wait for 50 ns;
         branch_address <= "0000100";
         wait for 50 ns;
+        is_branch <= '0';
         wait;
     end process;
 end a_proto_control_tb ; -- a_proto_control_tb
