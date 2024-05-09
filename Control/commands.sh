@@ -4,10 +4,10 @@
 #ghdl -a pc_tb.vhd
 #ghdl -e pc_tb
 
-ghdl -a one_state_machine.vhd
+ghdl -a ../PC/one_state_machine.vhd
 ghdl -e one_state_machine
 
-ghdl -a rom.vhd
+ghdl -a ../ROM/rom.vhd
 ghdl -e rom
 
 ghdl -a proto_control.vhd

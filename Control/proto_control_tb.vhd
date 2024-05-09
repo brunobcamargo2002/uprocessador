@@ -28,7 +28,8 @@ begin
 
     uut : proto_control port map (
         clk => clk,
-        wr_en => 1,
+        rst => rst,
+        wr_en => '1',
         data_out => data_out,
         is_branch => is_branch,
         branch_address => branch_address
