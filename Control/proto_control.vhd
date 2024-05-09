@@ -20,11 +20,22 @@ architecture proto_control of proto_control is
             data_out: out unsigned(6 downto 0)
         );
     end component;
+    component rom is 
+        port(
+        clk: in std_logic;
+        address: in unsigned(6 downto 0);
+        data: out unsigned(15 downto 0)
+        );
+    end component;
+
     signal data_in: unsigned(6 downto 0):= "0000000";
-    signal data_out_s: unsigned(6 downto 0);
+    signal data_out_s, address_s: unsigned(6 downto 0);
+    signal data_s: unsigned(15 downto 0);
 begin
     pc : registrator_7 port map(clk => clk, rst => rst, wr_en => '1', data_in => data_in, data_out => data_out_s);  
+    rom_1 : rom port map(clk => clk, address => address_s, data => data_s)
     data_in <= data_out_s+1;
     data_out <= data_out_s;
+    address_s <= data_out_s; 
 
 end architecture;
