@@ -2,25 +2,51 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-ENTITY registrator_16 is 
-    port(
-        clk: in std_logic;
-        rst: in std_logic;
-        estado: out unsigned(15 downto 0)
-    );
+entity one_state_machine_tb is
 end entity;
 
-architecture a_registrator_16 of registrator_16 is
-    signal estado: std_logic;
-begin
+architecture a_one_state_machine_tb of one_state_machine_tb is
+    component one_state_machine
+    port (
+        clk : in std_logic;
+        rst : in std_logic;
+        estado : out std_logic
+    ) ;
+    end component;
     
-    process(clk, rst, wr_en)
-    begin
-        if rst='1' then
-            estado <= "0";
-        elif rising_edge(clk) then
-            estado <= not estado;
-        end if;
+    signal clk, rst, estado : std_logic;
+begin 
+
+    uut : one_state_machine port map (
+        clk => clk,
+        rst => rst,
+        estado => estado
+    );
+
+    process begin
+        rst <= '1';
+        clk <= '0';
+        wait for 50 ns;
+        rst <= '0';
+        clk <= '1';
+        wait for 50 ns;
+        clk <= '0';
+        wait for 50 ns;
+        clk <= '1';
+        wait for 50 ns;
+        clk <= '0';
+        wait for 50 ns;
+        clk <= '1';
+        wait for 50 ns;
+        clk <= '0';
+        wait for 50 ns;
+        clk <= '1';
+        wait for 50 ns;
+        clk <= '0';
+        wait for 50 ns;
+        clk <= '1';
+        wait for 50 ns;
+        wait;
     end process;
-    data_out <= reg;    
+
 end architecture;
