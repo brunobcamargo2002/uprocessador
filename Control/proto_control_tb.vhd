@@ -17,7 +17,7 @@ architecture a_proto_control_tb of proto_control_tb is
         );
     end component;
 
-    signal clk, rst, is_branch: std_logic;
+    signal clk, rst, is_branch, wr_en: std_logic;
     signal data_out, branch_address: unsigned(6 downto 0);
 
     signal finished : std_logic := '0';
@@ -29,7 +29,7 @@ begin
     uut : proto_control port map (
         clk => clk,
         rst => rst,
-        wr_en => '1',
+        wr_en => wr_en,
         data_out => data_out,
         is_branch => is_branch,
         branch_address => branch_address

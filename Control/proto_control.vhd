@@ -46,7 +46,6 @@ begin
     rom_1 : rom port map(clk => clk, address => address_s, data => data_s);
     one_state_machine_1 : one_state_machine port map (clk => clk, rst => rst, estado => estado_s);
     data_in <= data_out_s+1 when estado_s = '1' else data_out_s;
-    data_out <= data_out_s;
     address_s <= data_out_s when is_branch = '0' else branch_address; 
 
 end architecture;
