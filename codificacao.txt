@@ -1,0 +1,18 @@
+ADDI: 0001 rrra aacc cccc
+
+r: armazena o resultado
+a: operando 1 (reg)
+c: operando 2 (cte)
+
+
+ADD: 0010 rrra aabb bxxx
+
+r: armazena o resultado
+a: operando 1 (reg)
+b: operando 2 (reg)
+x: irrelevante
+
+LI: 0011 rrrc cccc cccc
+
+r: armazena o resultado
+c: constante a ser carregada

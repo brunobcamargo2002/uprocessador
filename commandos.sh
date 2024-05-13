@@ -12,11 +12,20 @@ ghdl -e xor_op
 ghdl -e ula
 
 #RegisterBank
-ghdl -a Register_Bank/registrator_16.vhd
 ghdl -a Register_Bank/reg_bd.vhd
 
-ghdl -e registrator_16
 ghdl -e reg_bd
+
+#ROM
+
+ghdl -a ROM/rom.vhd
+
+ghdl -e rom
+
+#Control
+
+ghdl -a Control/proto_control.vhd
+ghdl -e proto_control
 
 #TopLevel
 ghdl -a top_level.vhd

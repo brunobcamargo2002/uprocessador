@@ -89,46 +89,13 @@ begin
         end process clk_proc;
 
 
-       process                      -- sinais dos casos de teste (p.ex.)
-       begin
-         --addi beg5, zero, 5
-        wait for 200 ns;
-        wr_en <= '0';
-        wait for 100 ns;
-        read_0 <="000";
-        mux_2 <= '1';
-        cte <= "0000000000000101";
-        operation <= "00";
-        write_register <= "101";
-        wait for 100 ns;
-        wr_en <= '1';
-        
-
-         --addi reg3, beg5, 7
-         wait for 100 ns;
-         wr_en <= '0';
-         wait for 100 ns;
-         read_0 <="101";
-         mux_2 <= '1';
-         cte <= "0000000000000111";
-         operation <= "00";
-         write_register <= "100";
-         wait for 100 ns;
-         wr_en <= '1';
-
-        --sub reg7, reg3, beg5
-         wait for 100 ns;
-         wr_en <= '0';
-         wait for 100 ns;
-         read_0 <="101";
-         read_1 <="100";
-         mux_2 <= '0';
-         operation <= "01";
-         write_register <= "111";
-         wait for 100 ns;
-         wr_en <= '1';
-         wait;
-       end process;
+        process                      -- sinais dos casos de teste (p.ex.)
+        begin
+        r1 = B"0000_0000_0000_0001";
+        r2 = B"0000_0000_0000_0100";
+        wait 300 ns;
+        wait;
+        end process;
 
        
 end architecture;
