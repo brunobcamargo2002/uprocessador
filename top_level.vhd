@@ -179,7 +179,7 @@ begin
 
     
     -- opcode "0001" = LD
-    wr_en_s <= '1' when opcode = "0001" else '0';
+    wr_en_s <= '1' when opcode = "0001" and estado_s = "01" else '0';
     -- opcode "0010" = ADD
     -- opcode "0011" = ADDI
     -- opcode "0100" = SUB
@@ -187,8 +187,8 @@ begin
         -- ULA
         operation_ula <= "00" when opcode = "0010" or opcode = "0011" else
             "01";
-        in_b <= "0000000" & const when (opcode = "0011" or opcode = "0101") and estado_s = "01" else
-            regA_data_out;-- when opcode = "0010" or opcode = "0100"
+        in_b <= "0000000" & const when (opcode = "0011" or opcode = "0101") else -- and estado_s = "01" else
+            regA_data_out; -- when estado_s = "01";-- when opcode = "0010" or opcode = "0100"
 
     --Wires
     ULA_out <= ULAout;
