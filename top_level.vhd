@@ -75,17 +75,24 @@ architecture a_top_level of top_level is
     --ULA signals
     signal in_a, in_b, ULAout : unsigned(15 downto 0);
     signal is_zero : std_logic;
+    signal operation_ula : unsigned(1 downto 0);
 
 
     --Register Bank signals
-    signal read_data1, write_data_s: unsigned (15 downto 0);
-    signal write_register_s : unsigned(2 downto 0);
+    signal regA_data_out, regB_data_out, write_data_s: unsigned (15 downto 0);
+    signal write_register_s, rA_address, rB_address: unsigned(2 downto 0);
     signal wr_en_s : std_logic;
+    signal const : unsigned(8 downto 0);
 
     -- instruction_reg signals
     signal data_out_instruction_reg, data_in_instruction_reg : unsigned (15 downto 0);
     signal opcode : unsigned (3 downto 0);
     signal wr_en_instruction_reg : std_logic;
+
+    -- accumulator signals 
+    signal wr_en_accumulator : std_logic;
+    signal data_in_accumulator : unsigned (15 downto 0);
+    signal data_out_accumulator : unsigned (15 downto 0);
 
     -- proto_control signals
     signal data_out_proto_control : unsigned (15 downto 0);
@@ -98,21 +105,21 @@ architecture a_top_level of top_level is
 
 begin 
     
-    --ula_1: ula port map ( operation => operation, 
-    --in_a => in_a, 
-    --in_b => in_b,
-    --ULAout => ULAout,
-    --is_zero => is_zero);
+    ula_1: ula port map ( operation => operation_ula, 
+        in_a => in_a, 
+        in_b => in_b,
+        ULAout => ULAout,
+        is_zero => is_zero);
 
-    reg_bd_1: reg_bd port map(read_r0 => "000",--read_0, 
-    read_r1 => "000",--read_1, 
+    reg_bd_1: reg_bd port map(read_r0 => rA_address,--read_0, 
+    read_r1 => rB_address,--read_1, 
     wr_en => wr_en_s,
     write_register => write_register_s, 
     write_data => write_data_s,  
     clk => clk, 
     rst => rst,
-    read_data0 => in_a, 
-    read_data1 => read_data1,
+    read_data0 => regA_data_out, 
+    read_data1 => regB_data_out,
     --wires
     r0 => r0, r2 => r2, r3 => r3, r4 => r4, r5 => r5, r6 => r6, r7 => r7);
 
@@ -122,6 +129,14 @@ begin
         wr_en => wr_en_instruction_reg,
         data_in => data_in_instruction_reg,
         data_out => data_out_instruction_reg
+    );
+
+    accumulator : registrator_16 port map (
+        clk => clk,
+        rst => rst,
+        wr_en => wr_en_accumulator,
+        data_in => data_in_accumulator,
+        data_out => data_out_accumulator
     );
 
     proto_control_1 : proto_control port map (
@@ -142,21 +157,38 @@ begin
 
     opcode <= data_out_instruction_reg(15 downto 12);
 
-    wr_en_proto_control <= '1' when estado_s = "00";
+    wr_en_proto_control <= '1' when estado_s = "10";
 
     data_in_instruction_reg <= data_out_proto_control;
-    wr_en_instruction_reg <= '1' when estado_s = "01";
+    wr_en_instruction_reg <= '1' when estado_s = "00";
 
     -- reg_bank
-    -- opcode "0001" = LI
-    write_register_s <= data_out_instruction_reg(11 downto 9) when opcode = "0001" and estado_s = "10"
-        else "000";
-    write_data_s <= "0000000" & data_out_instruction_reg(8 downto 0) when opcode = "0001" and estado_s = "10"
-        else X"0000";
-    wr_en_s <= '1' when opcode = "0001" else '0';
+    write_register_s <= data_out_instruction_reg(11 downto 9);
+    rA_address <= data_out_instruction_reg(8 downto 6);
+    --rB_address <= data_out_instruction_reg(5 downto 3);
+    const <= data_out_instruction_reg(8 downto 0);
+    
+    write_data_s <= "0000000" & data_out_instruction_reg(8 downto 0);
 
-    --mux in_b of ula
-    -- in_b <= read_data1 when mux_2='0' else cte;
+    -- ULA
+    data_in_accumulator <= ULAOut;
+    in_a <= data_out_accumulator;
+
+    -- accumulator
+    wr_en_accumulator <= '1' when estado_s = "10" else '0';
+
+    
+    -- opcode "0001" = LD
+    wr_en_s <= '1' when opcode = "0001" else '0';
+    -- opcode "0010" = ADD
+    -- opcode "0011" = ADDI
+    -- opcode "0100" = SUB
+    -- opcode "0101" = SUBI
+        -- ULA
+        operation_ula <= "00" when opcode = "0010" or opcode = "0011" else
+            "01";
+        in_b <= "0000000" & const when (opcode = "0011" or opcode = "0101") and estado_s = "01" else
+            regA_data_out;-- when opcode = "0010" or opcode = "0100"
 
     --Wires
     ULA_out <= ULAout;

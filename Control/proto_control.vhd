@@ -47,8 +47,8 @@ begin
     estado_s <= estado;
 
     new_address <= branch_address when is_branch = '1' else data_out_pc+1;
-    data_in_pc <= new_address when estado_s = "00" else data_out_pc;
-    address_rom <= data_out_pc when estado_s = "01";
+    data_in_pc <= new_address when estado_s = "10" else data_out_pc;
+    address_rom <= data_out_pc when estado_s = "00";
   
     data_out <= data_out_rom;
 end architecture;
