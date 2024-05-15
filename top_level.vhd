@@ -157,10 +157,14 @@ begin
 
     opcode <= data_out_instruction_reg(15 downto 12);
 
-    wr_en_proto_control <= '1' when estado_s = "10";
-
+    -- instruction_reg
     data_in_instruction_reg <= data_out_proto_control;
     wr_en_instruction_reg <= '1' when estado_s = "00";
+    
+    -- proto_control
+    wr_en_proto_control <= '1' when estado_s = "10";
+    branch_address_s <= data_out_instruction_reg(11 downto 5);
+    is_branch_s <= '1' when opcode = "1000" else '0';
 
     -- reg_bank
     write_register_s <= data_out_instruction_reg(11 downto 9);
@@ -178,10 +182,10 @@ begin
     -- accumulator
     --wr_en_accumulator <= '1' when estado_s = "10" else '0';
     wr_en_accumulator <= '0' when estado_s = "00" or estado_s = "01" or
-        opcode = "0001" or opcode = "0111" else '1';
+        opcode = "0001" or opcode = "0111" or opcode = "1000" else '1';
 
     
-        wr_en_s <= '1' when (opcode = "0001" or opcode = "0111") and estado_s = "01" else '0';
+    wr_en_s <= '1' when (opcode = "0001" or opcode = "0111") and estado_s = "01" else '0';
     -- opcode "0001" = LD
     -- opcode "0010" = ADD
     -- opcode "0011" = ADDI
@@ -189,12 +193,13 @@ begin
     -- opcode "0101" = SUBI
     -- opcode "0110" = MOVA
     -- opcode "0111" = MOVR
+    -- opcode "1000" = BRA
 
-        -- ULA
-        operation_ula <= "00" when opcode = "0010" or opcode = "0011" else
-            "01";
-        in_b <= "0000000" & const when (opcode = "0011" or opcode = "0101") else -- and estado_s = "01" else
-            regA_data_out; -- when estado_s = "01";-- when opcode = "0010" or opcode = "0100"
+    -- ULA
+    operation_ula <= "00" when opcode = "0010" or opcode = "0011" else
+        "01";
+    in_b <= "0000000" & const when (opcode = "0011" or opcode = "0101") else -- and estado_s = "01" else
+        regA_data_out; -- when estado_s = "01";-- when opcode = "0010" or opcode = "0100"
 
     --Wires
     ULA_out <= ULAout;
