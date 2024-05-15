@@ -168,24 +168,28 @@ begin
     --rB_address <= data_out_instruction_reg(5 downto 3);
     const <= data_out_instruction_reg(8 downto 0);
     
-    write_data_s <= "0000000" & data_out_instruction_reg(8 downto 0);
+    write_data_s <= data_out_accumulator when opcode = "0111" else
+        "0000000" & data_out_instruction_reg(8 downto 0);
 
     -- ULA
-    data_in_accumulator <= ULAOut;
+    data_in_accumulator <= regA_data_out when opcode = "0110" else ULAOut;
     in_a <= data_out_accumulator;
 
     -- accumulator
     --wr_en_accumulator <= '1' when estado_s = "10" else '0';
     wr_en_accumulator <= '0' when estado_s = "00" or estado_s = "01" or
-        opcode = "0001" else '1';
+        opcode = "0001" or opcode = "0111" else '1';
 
     
+        wr_en_s <= '1' when (opcode = "0001" or opcode = "0111") and estado_s = "01" else '0';
     -- opcode "0001" = LD
-    wr_en_s <= '1' when opcode = "0001" and estado_s = "01" else '0';
     -- opcode "0010" = ADD
     -- opcode "0011" = ADDI
     -- opcode "0100" = SUB
     -- opcode "0101" = SUBI
+    -- opcode "0110" = MOVA
+    -- opcode "0111" = MOVR
+
         -- ULA
         operation_ula <= "00" when opcode = "0010" or opcode = "0011" else
             "01";
