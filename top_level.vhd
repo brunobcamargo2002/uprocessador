@@ -175,7 +175,9 @@ begin
     in_a <= data_out_accumulator;
 
     -- accumulator
-    wr_en_accumulator <= '1' when estado_s = "10" else '0';
+    --wr_en_accumulator <= '1' when estado_s = "10" else '0';
+    wr_en_accumulator <= '0' when estado_s = "00" or estado_s = "01" or
+        opcode = "0001" else '1';
 
     
     -- opcode "0001" = LD
