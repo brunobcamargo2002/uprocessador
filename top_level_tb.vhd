@@ -10,11 +10,11 @@ architecture a_top_level_tb of top_level_tb is
     component top_level
         port (
             clk, rst: in std_logic;
-            operation: in unsigned (1 downto 0);
-            read_0, read_1, write_register: in unsigned(2 downto 0);
-            wr_en: in std_logic;
-            cte: in unsigned(15 downto 0);
-            mux_2: in std_logic;
+            --operation: in unsigned (1 downto 0);
+            --read_0, read_1, write_register: in unsigned(2 downto 0);
+            --wr_en: in std_logic;
+            --cte: in unsigned(15 downto 0);
+            --mux_2: in std_logic;
             ULA_out: out unsigned (15 downto 0);
             zero_flag: out std_logic;
             r0, r1, r2, r3, r4, r5, r6, r7: out unsigned(15 downto 0) 
@@ -33,7 +33,7 @@ architecture a_top_level_tb of top_level_tb is
     signal read_data1, cte: unsigned (15 downto 0);
     signal wr_en: std_logic;
 
-    constant period_time : time      := 100 ns;
+    constant period_time : time      := 50 ns;
     signal   finished    : std_logic := '0';
     signal clk, rst: std_logic;
 
@@ -46,13 +46,13 @@ architecture a_top_level_tb of top_level_tb is
 begin 
     tp_lvl: top_level port map(clk => clk,
     rst => rst,
-    operation => operation,
-    read_0 => read_0,
-    read_1 => read_1,
-    write_register => write_register,
-    wr_en => wr_en,
-    cte => cte,
-    mux_2 => mux_2,
+    --operation => operation,
+    --read_0 => read_0,
+    --read_1 => read_1,
+    --write_register => write_register,
+    --wr_en => wr_en,
+    --cte => cte,
+    --mux_2 => mux_2,
     ULA_out => ULA_out,
     zero_flag => zero_flag,
     r0 => r0, r1 => r1, r2 => r2, r3 => r3, 
@@ -71,7 +71,7 @@ begin
         
         sim_time_proc: process
         begin
-            wait for 10 us;         -- <== TEMPO TOTAL DA SIMULAÇÃO!!!
+            wait for 2 us;         -- <== TEMPO TOTAL DA SIMULAÇÃO!!!
             finished <= '1';
             wait;
         end process sim_time_proc;
@@ -91,43 +91,7 @@ begin
 
        process                      -- sinais dos casos de teste (p.ex.)
        begin
-         --addi beg5, zero, 5
-        wait for 200 ns;
-        wr_en <= '0';
-        wait for 100 ns;
-        read_0 <="000";
-        mux_2 <= '1';
-        cte <= "0000000000000101";
-        operation <= "00";
-        write_register <= "101";
-        wait for 100 ns;
-        wr_en <= '1';
-        
-
-         --addi reg3, beg5, 7
-         wait for 100 ns;
-         wr_en <= '0';
-         wait for 100 ns;
-         read_0 <="101";
-         mux_2 <= '1';
-         cte <= "0000000000000111";
-         operation <= "00";
-         write_register <= "100";
-         wait for 100 ns;
-         wr_en <= '1';
-
-        --sub reg7, reg3, beg5
-         wait for 100 ns;
-         wr_en <= '0';
-         wait for 100 ns;
-         read_0 <="101";
-         read_1 <="100";
-         mux_2 <= '0';
-         operation <= "01";
-         write_register <= "111";
-         wait for 100 ns;
-         wr_en <= '1';
-         wait;
+        wait;
        end process;
 
        

@@ -1,19 +1,19 @@
 v 4
-file . "../utils/registrator_7.vhd" "5e1f00b035406b0d471593b8390b6831a1931423" "20240509015812.540":
-  entity registrator_7 at 1( 0) + 0 on 105;
-  architecture a_registrator_7 of registrator_7 at 15( 307) + 0 on 106;
-file . "proto_control_tb.vhd" "9d7f7ff251b06dcafbb668d60008468ded93dc2d" "20240509022007.726":
-  entity proto_control_tb at 1( 0) + 0 on 121;
-  architecture a_proto_control_tb of proto_control_tb at 8( 117) + 0 on 122;
-file . "../utils/one_state_machine.vhd" "b8b785f35c3694853211ab93170690b22db88c73" "20240509022007.198":
-  entity one_state_machine at 1( 0) + 0 on 115;
-  architecture a_one_state_machine of one_state_machine at 13( 224) + 0 on 116;
-file . "../ROM/rom.vhd" "3afdc11f4ff1ecf95b4ea32e118f7bc774581564" "20240509022007.377":
-  entity rom at 1( 0) + 0 on 117;
-  architecture a_rom of rom at 13( 235) + 0 on 118;
+file . "../utils/registrator_7.vhd" "db21d39f7775bf7ef682fac94b8dc5e911aa261d" "20240514145717.656":
+  entity registrator_7 at 1( 0) + 0 on 207;
+  architecture a_registrator_7 of registrator_7 at 15( 293) + 0 on 208;
+file . "proto_control_tb.vhd" "9e7e6fd374bc3027788cf3c6944136297fa82f94" "20240514145717.829":
+  entity proto_control_tb at 1( 0) + 0 on 213;
+  architecture a_proto_control_tb of proto_control_tb at 8( 110) + 0 on 214;
+file . "../utils/one_state_machine.vhd" "2e8f11176b7ab013380718d550749f616ca97052" "20240514145717.584":
+  entity one_state_machine at 1( 0) + 0 on 205;
+  architecture a_one_state_machine of one_state_machine at 13( 212) + 0 on 206;
+file . "../ROM/rom.vhd" "411364a79401bee5353e798525fcff865a02eeab" "20240514145717.700":
+  entity rom at 1( 0) + 0 on 209;
+  architecture a_rom of rom at 13( 223) + 0 on 210;
 file . "one_state_machine_tb.vhd" "a788233789fc9ff8ca3b8877f793e83b1aac2506" "20240509003024.542":
   entity one_state_machine_tb at 1( 0) + 0 on 17;
   architecture a_one_state_machine_tb of one_state_machine_tb at 8( 114) + 0 on 18;
-file . "proto_control.vhd" "17764c08e8234db025c73601d50d2a61885510b7" "20240509022007.530":
-  entity proto_control at 1( 0) + 0 on 119;
-  architecture proto_control of proto_control at 15( 326) + 0 on 120;
+file . "proto_control.vhd" "123b469063bd3b35b43426990537b663bb4bd013" "20240514231421.399":
+  entity proto_control at 1( 0) + 0 on 221;
+  architecture proto_control of proto_control at 16( 354) + 0 on 222;
