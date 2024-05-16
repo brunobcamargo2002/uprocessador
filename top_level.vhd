@@ -7,12 +7,19 @@ entity top_level is
     clk, rst: in std_logic;
 
     ----wires----
+    estado_out : out unsigned(1 downto 0);
+
+    pc_out : out unsigned(15 downto 0);
+
+    instruction_reg_out : out unsigned(15 downto 0);
+
+    acumulador_out : out unsigned(15 downto 0);
+
     --ULA wires
     ULA_out: out unsigned (15 downto 0);
-    zero_flag: out std_logic;
 
     --RB wires
-    r0, r1, r2, r3, r4, r5, r6, r7: out unsigned(15 downto 0) 
+    r0, r1, r2, r3, r4, r5, r6, r7: out unsigned(15 downto 0)
     );
 
 
@@ -202,8 +209,11 @@ begin
         regA_data_out; -- when estado_s = "01";-- when opcode = "0010" or opcode = "0100"
 
     --Wires
+    estado_out <= estado_s;
     ULA_out <= ULAout;
     zero_flag <= is_zero;
-
+    pc_out <= data_out_proto_control;
+    instruction_reg_out <= data_out_instruction_reg;
+    acumulador_out <= data_out_accumulator;
 
 end architecture;
