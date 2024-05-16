@@ -1,0 +1,16 @@
+A: LD R3, 5
+B: LD R4, 8
+C: ADD A, R3
+    ADD A, R4
+    MOVR R5, A
+D: MOVA A, R5 (Verificar se precisa mesmo dessa linha)
+    SUBI A, 1
+    MOVR R5, A
+E: BRA 20
+F: MOVA A, ZERO
+    MOVR R5, A
+G: MOVA A, R5
+    MOVR R5, A
+H: BRA 2
+I: MOVA A, ZERO
+    MOVR R3, A
