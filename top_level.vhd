@@ -11,6 +11,7 @@ entity top_level is
 
     pc_out : out unsigned(15 downto 0);
 
+
     instruction_reg_out : out unsigned(15 downto 0);
 
     acumulador_out : out unsigned(15 downto 0);
@@ -79,6 +80,7 @@ architecture a_top_level of top_level is
     );
     end component;
 
+
     --ULA signals
     signal in_a, in_b, ULAout : unsigned(15 downto 0);
     signal is_zero : std_logic;
@@ -123,6 +125,7 @@ begin
     wr_en => wr_en_s,
     write_register => write_register_s, 
     write_data => write_data_s,  
+
     clk => clk, 
     rst => rst,
     read_data0 => regA_data_out, 
@@ -208,6 +211,7 @@ begin
     in_b <= "0000000" & const when (opcode = "0011" or opcode = "0101") else -- and estado_s = "01" else
         regA_data_out; -- when estado_s = "01";-- when opcode = "0010" or opcode = "0100"
 
+
     --Wires
     estado_out <= estado_s;
     ULA_out <= ULAout;
@@ -216,4 +220,6 @@ begin
     instruction_reg_out <= data_out_instruction_reg;
     acumulador_out <= data_out_accumulator;
 
+
+    
 end architecture;
