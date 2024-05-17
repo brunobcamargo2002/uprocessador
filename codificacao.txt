@@ -1,18 +1,35 @@
-ADDI: 0001 rrra aacc cccc
+LD: 0001 wwwc cccc cccc
+    www: Endereço do registrador a ser carregado
+    c cccc cccc: constante de 9 bits a ser carregada
 
-r: armazena o resultado
-a: operando 1 (reg)
-c: operando 2 (cte)
+ADD: 0010 xxxa aaxx xxxx
+onde
+    aaa: Endereço do registrador que será parte da operação em complemento de 2
+    x: irrelevante
 
+ADDI: 0011 xxxc cccc cccc
+onde
+    c cccc cccc: constante que será parte da operação em complemento de 2
+    x: irrelevante
 
-ADD: 0010 rrra aabb bxxx
+SUB: 0100 xxxa aaxx xxxx
+onde
+    aaa: Endereço do registrador que será parte da operação em complemento de 2
+    x: irrelevante
 
-r: armazena o resultado
-a: operando 1 (reg)
-b: operando 2 (reg)
-x: irrelevante
+SUBI: 0101 xxxc cccc cccc
+onde
+    c cccc cccc: constante que será parte da operação em complemento de 2
+    x: irrelevante
 
-LI: 0011 rrrc cccc cccc
+MOVA: 0110 xxxa aaxx xxxx
+    aaa: Endereço do registrador que será copiado para o acumulador
+    x: irrelevante
 
-r: armazena o resultado
-c: constante a ser carregada
+MOVR: 0111 wwwx xxxx xxxx
+    www: Endereço do registrador a ser carregado com o acumulador
+    x: irrelevante
+
+BRA: 1000 aaaa aaax xxxx
+    aaa aaaa: Instrução da ROM para realizar o salto
+    x: irrelevante

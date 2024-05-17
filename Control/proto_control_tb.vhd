@@ -11,14 +11,15 @@ architecture a_proto_control_tb of proto_control_tb is
         port (
             clk, rst: in std_logic;
             wr_en: in std_logic;
-            data_out: out unsigned(6 downto 0);
+            data_out: out unsigned(15 downto 0);
             is_branch: in std_logic;
             branch_address: in unsigned(6 downto 0)
         );
     end component;
 
     signal clk, rst, is_branch, wr_en: std_logic;
-    signal data_out, branch_address: unsigned(6 downto 0);
+    signal branch_address: unsigned(6 downto 0);
+    signal data_out: unsigned(15 downto 0);
 
     signal finished : std_logic := '0';
 
@@ -56,10 +57,13 @@ begin
         is_branch <= '0';
         branch_address <= "0000000";
         wr_en <= '1';
+        rst <= '1';
+        wait for 100 ns;
+        rst <= '0';
         wait for 300 ns;
         is_branch <= '1';
         wait for 50 ns;
-        branch_address <= "0000100";
+        branch_address <= "0000001";
         wait for 50 ns;
         is_branch <= '0';
         wait;

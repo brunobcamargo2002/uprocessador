@@ -1,7 +1,0 @@
-v 4
-file . "rom.vhd" "919d9c8754762bdaa38f49ae15a5c8b3dfe06e7b" "20240513000948.577":
-  entity rom at 1( 0) + 0 on 31;
-  architecture a_rom of rom at 13( 223) + 0 on 32;
-file . "rom_tb.vhd" "c4edafa6e71df30e8900dca81598250396d95003" "20240513000948.618":
-  entity rom_tb at 1( 0) + 0 on 33;
-  architecture a_rom_tb of rom_tb at 8( 100) + 0 on 34;

@@ -7,6 +7,9 @@
 ghdl -a ../utils/one_state_machine.vhd
 ghdl -e one_state_machine
 
+ghdl -a ../utils/registrator_7.vhd
+ghdl -e registrator_7
+
 ghdl -a ../ROM/rom.vhd
 ghdl -e rom
 

@@ -11,19 +11,26 @@ ghdl -e subtracter
 ghdl -e xor_op
 ghdl -e ula
 
+#ROM
+ghdl -a ROM/rom.vhd
+ghdl -e rom
+
 #RegisterBank
+
+ghdl -a utils/registrator_16.vhd
+
 ghdl -a Register_Bank/reg_bd.vhd
 
 ghdl -e reg_bd
 
-#ROM
+#Utils
+ghdl -a utils/three_state_machine.vhd
+ghdl -a utils/registrator_7.vhd
 
-ghdl -a ROM/rom.vhd
-
-ghdl -e rom
+ghdl -e three_state_machine
+ghdl -e registrator_7
 
 #Control
-
 ghdl -a Control/proto_control.vhd
 ghdl -e proto_control
 
@@ -39,8 +46,10 @@ ghdl -e top_level_tb
 
 #Generation of GTKWAVE file
 ghdl -r top_level_tb --vcd=top_level_tb.vcd
+#ghdl -r top_level_tb --wave=top_level_tb.ghw
 
 #GTKWAVE
 gtkwave top_level_tb.vcd
+#gtkwave top_level_tb.ghw
 
 

@@ -6,23 +6,21 @@ entity top_level is
     port(
     clk, rst: in std_logic;
 
-    --ULA inputs
-    -- operation: in unsigned (1 downto 0);
-
-    --Register Bank inputs
-    --read_0, read_1, write_register: in unsigned(2 downto 0);
-    wr_en: in std_logic;
-
-    cte: in unsigned(15 downto 0);
-    mux_2: in std_logic;
-
     ----wires----
+    estado_out : out unsigned(1 downto 0);
+
+    pc_out : out unsigned(15 downto 0);
+
+
+    instruction_reg_out : out unsigned(15 downto 0);
+
+    acumulador_out : out unsigned(15 downto 0);
+
     --ULA wires
     ULA_out: out unsigned (15 downto 0);
-    zero_flag: out std_logic;
 
     --RB wires
-    r0, r1, r2, r3, r4, r5, r6, r7: out unsigned(15 downto 0) 
+    r0, r1, r2, r3, r4, r5, r6, r7: out unsigned(15 downto 0)
     );
 
 
@@ -59,71 +57,169 @@ architecture a_top_level of top_level is
     port (
         clk, rst: in std_logic;
         wr_en: in std_logic;
-        data_out: out unsigned(6 downto 0);
+        data_out: out unsigned(15 downto 0);
+        estado: in unsigned(1 downto 0);
         is_branch: in std_logic;
-        branch_address: in unsigned(6 downto 0);
-        data_rom: out unsigned(15 downto 0)
+        branch_address: in unsigned(6 downto 0)
     );
     end component;
-    
-    
+
+    component three_state_machine is
+        port( clk,rst: in std_logic;
+              estado: out unsigned(1 downto 0)
+        );
+     end component;
+
+    component registrator_16 is 
+    port(
+        clk: in std_logic;
+        rst: in std_logic;
+        wr_en: in std_logic;
+        data_in: in unsigned(15 downto 0);
+        data_out: out unsigned(15 downto 0)
+    );
+    end component;
+
 
     --ULA signals
     signal in_a, in_b, ULAout : unsigned(15 downto 0);
     signal is_zero : std_logic;
-    signal operation_s : unsigned (1 downto 0);
+    signal operation_ula : unsigned(1 downto 0);
 
 
     --Register Bank signals
-    signal read_data1: unsigned (15 downto 0);
-    signal read_0, read_1, write_register_s: unsigned (2 downto 0);
+    signal regA_data_out, regB_data_out, write_data_s: unsigned (15 downto 0);
+    signal write_register_s, rA_address, rB_address: unsigned(2 downto 0);
+    signal wr_en_s : std_logic;
+    signal const : unsigned(8 downto 0);
 
-    -- Proto Control signals
-    signal data_out_pc, branch_address_s: unsigned(6 downto 0);
-    signal is_branch_s: std_logic;
+    -- instruction_reg signals
+    signal data_out_instruction_reg, data_in_instruction_reg : unsigned (15 downto 0);
+    signal opcode : unsigned (3 downto 0);
+    signal wr_en_instruction_reg : std_logic;
+
+    -- accumulator signals 
+    signal wr_en_accumulator : std_logic;
+    signal data_in_accumulator : unsigned (15 downto 0);
+    signal data_out_accumulator : unsigned (15 downto 0);
+
+    -- proto_control signals
+    signal data_out_proto_control : unsigned (15 downto 0);
+    signal is_branch_s : std_logic;
+    signal branch_address_s : unsigned (6 downto 0);
+    signal wr_en_proto_control : std_logic;
+
+    -- 3 state machine signals
+    signal estado_s : unsigned (1 downto 0);
 
 begin 
     
-    uut: ula port map ( operation => operation, 
-    in_a => in_a, 
-    in_b => in_b,
-    ULAout => ULAout,
-    is_zero => is_zero);
+    ula_1: ula port map ( operation => operation_ula, 
+        in_a => in_a, 
+        in_b => in_b,
+        ULAout => ULAout,
+        is_zero => is_zero);
 
-    reg_b: reg_bd port map(read_r0 => read_0, 
-    read_r1 => read_1, 
-    wr_en => wr_en,
+    reg_bd_1: reg_bd port map(read_r0 => rA_address,--read_0, 
+    read_r1 => rB_address,--read_1, 
+    wr_en => wr_en_s,
     write_register => write_register_s, 
-    write_data => ULAout,  
+    write_data => write_data_s,  
+
     clk => clk, 
     rst => rst,
-    read_data0 => in_a, 
-    read_data1 => read_data1,
+    read_data0 => regA_data_out, 
+    read_data1 => regB_data_out,
     --wires
     r0 => r0, r2 => r2, r3 => r3, r4 => r4, r5 => r5, r6 => r6, r7 => r7);
 
-    proto_control_unit : proto_control port map (
+    instruction_reg : registrator_16 port map (
         clk => clk,
         rst => rst,
-        wr_en => wr_en,
-        data_out => data_out_pc,
+        wr_en => wr_en_instruction_reg,
+        data_in => data_in_instruction_reg,
+        data_out => data_out_instruction_reg
+    );
+
+    accumulator : registrator_16 port map (
+        clk => clk,
+        rst => rst,
+        wr_en => wr_en_accumulator,
+        data_in => data_in_accumulator,
+        data_out => data_out_accumulator
+    );
+
+    proto_control_1 : proto_control port map (
+        clk => clk,
+        rst => rst,
+        wr_en => wr_en_proto_control,
+        data_out => data_out_proto_control,
+        estado => estado_s,
         is_branch => is_branch_s,
         branch_address => branch_address_s
-    )
+    );
 
-    --mux in_b of ula
-    in_b <= read_data1 when mux_2='0' else cte;
+    three_state_machine_1 : three_state_machine port map (
+        clk => clk,
+        rst => rst,
+        estado => estado_s
+    );
+
+    opcode <= data_out_instruction_reg(15 downto 12);
+
+    -- instruction_reg
+    data_in_instruction_reg <= data_out_proto_control;
+    wr_en_instruction_reg <= '1' when estado_s = "00";
+    
+    -- proto_control
+    wr_en_proto_control <= '1' when estado_s = "10";
+    branch_address_s <= data_out_instruction_reg(11 downto 5);
+    is_branch_s <= '1' when opcode = "1000" else '0';
+
+    -- reg_bank
+    write_register_s <= data_out_instruction_reg(11 downto 9);
+    rA_address <= data_out_instruction_reg(8 downto 6);
+    --rB_address <= data_out_instruction_reg(5 downto 3);
+    const <= data_out_instruction_reg(8 downto 0);
+    
+    write_data_s <= data_out_accumulator when opcode = "0111" else
+        "0000000" & data_out_instruction_reg(8 downto 0);
+
+    -- ULA
+    data_in_accumulator <= regA_data_out when opcode = "0110" else ULAOut;
+    in_a <= data_out_accumulator;
+
+    -- accumulator
+    --wr_en_accumulator <= '1' when estado_s = "10" else '0';
+    wr_en_accumulator <= '0' when estado_s = "00" or estado_s = "01" or
+        opcode = "0001" or opcode = "0111" or opcode = "1000" else '1';
+
+    
+    wr_en_s <= '1' when (opcode = "0001" or opcode = "0111") and estado_s = "01" else '0';
+    -- opcode "0001" = LD
+    -- opcode "0010" = ADD
+    -- opcode "0011" = ADDI
+    -- opcode "0100" = SUB
+    -- opcode "0101" = SUBI
+    -- opcode "0110" = MOVA
+    -- opcode "0111" = MOVR
+    -- opcode "1000" = BRA
+
+    -- ULA
+    operation_ula <= "00" when opcode = "0010" or opcode = "0011" else
+        "01";
+    in_b <= "0000000" & const when (opcode = "0011" or opcode = "0101") else -- and estado_s = "01" else
+        regA_data_out; -- when estado_s = "01";-- when opcode = "0010" or opcode = "0100"
+
 
     --Wires
+    estado_out <= estado_s;
     ULA_out <= ULAout;
     zero_flag <= is_zero;
+    pc_out <= data_out_proto_control;
+    instruction_reg_out <= data_out_instruction_reg;
+    acumulador_out <= data_out_accumulator;
 
-    read_0 <= data_rom(8 downto 6);
-    read_1 <= data_rom(5 downto 3);
-    write_register_s <= data_rom(11 downto 9);
-
-    operation_s <= "00" when data_rom(15 downto 12) = "0001" or data data_rom(15 downto 12) = "0010" else
-            "11";
 
     
 end architecture;
