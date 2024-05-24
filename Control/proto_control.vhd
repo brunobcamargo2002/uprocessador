@@ -10,6 +10,7 @@ entity proto_control is
         branch_address: in unsigned(6 downto 0);
         estado: in unsigned(1 downto 0);
         data_out: out unsigned(15 downto 0)
+
     );
 end entity;
 
