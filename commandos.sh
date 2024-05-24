@@ -34,21 +34,21 @@ ghdl -a Control/proto_control.vhd
 ghdl -e proto_control
 
 #TopLevel
-ghdl -a top_level.vhd
+ghdl -a processador.vhd
 
-ghdl -e top_level
+ghdl -e processador
 
 #TestBench
-ghdl -a top_level_tb.vhd
+ghdl -a processador_tb.vhd
 
-ghdl -e top_level_tb
+ghdl -e processador_tb
 
 #Generation of GTKWAVE file
-ghdl -r top_level_tb --vcd=top_level_tb.vcd
+ghdl -r processador_tb --vcd=processador_tb.vcd
 #ghdl -r top_level_tb --wave=top_level_tb.ghw
 
 #GTKWAVE
-gtkwave top_level_tb.vcd
+gtkwave processador_tb.vcd
 #gtkwave top_level_tb.ghw
 
 

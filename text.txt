@@ -1,7 +1,0 @@
-"oooo aaab bbcc cxxx"
-aaa = write resister
-bbb = operando 1
-ccc = operando 2
-
-"oooo cccc cccc cccc"
-c = constante

@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity top_level is
+entity processador is
     port(
     clk, rst: in std_logic;
 
@@ -25,7 +25,7 @@ entity top_level is
 
 end entity;
 
-architecture a_top_level of top_level is
+architecture a_processador of processador is
     component ula
         port (
             operation : in unsigned(1 downto 0);
@@ -211,7 +211,6 @@ begin
     --Wires
     estado_out <= estado_s;
     ULA_out <= ULAout;
-    zero_flag <= is_zero;
     pc_out <= data_out_proto_control;
     instruction_reg_out <= data_out_instruction_reg;
     acumulador_out <= data_out_accumulator;

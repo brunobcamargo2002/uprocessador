@@ -1,40 +1,43 @@
 v 4
-file . "utils/registrator_7.vhd" "db21d39f7775bf7ef682fac94b8dc5e911aa261d" "20240516013000.941":
-  entity registrator_7 at 1( 0) + 0 on 3117;
-  architecture a_registrator_7 of registrator_7 at 15( 293) + 0 on 3118;
+file . "processador.vhd" "3077553e9aadfc8791b20511529beccb00e78fc0" "20240524181758.354":
+  entity processador at 1( 0) + 0 on 3293;
+  architecture a_processador of processador at 28( 494) + 0 on 3294;
+file . "Control/proto_control.vhd" "44d5aba70184295ee2ac4f477451ebb71889b7ba" "20240524181758.308":
+  entity proto_control at 1( 0) + 0 on 3291;
+  architecture proto_control of proto_control at 16( 354) + 0 on 3292;
+file . "ROM/rom.vhd" "046854734ab9b2f358d1d2372a6781c889935461" "20240524181758.117":
+  entity rom at 1( 0) + 0 on 3281;
+  architecture a_rom of rom at 13( 223) + 0 on 3282;
+file . "utils/three_state_machine.vhd" "22f257918f865b93aef00883ac85977369b5d008" "20240524181758.231":
+  entity three_state_machine at 1( 0) + 0 on 3287;
+  architecture a_three_state_machine of three_state_machine at 9( 191) + 0 on 3288;
+file . "utils/registrator_16.vhd" "da84781be81b9b1d80c20c6cb6f98e1fafe0dae4" "20240524181758.154":
+  entity registrator_16 at 1( 0) + 0 on 3283;
+  architecture a_registrator_16 of registrator_16 at 15( 296) + 0 on 3284;
+file . "ULA/subtracter.vhd" "b54870fc15101a5fc9539b697b1aba9befce43bd" "20240524181757.863":
+  entity subtracter at 1( 0) + 0 on 3273;
+  architecture a_subtracter of subtracter at 13( 248) + 0 on 3274;
+file . "ULA/adder.vhd" "6853c005e46e80d6f85b739ef0e847e7bfc4d9fa" "20240524181757.875":
+  entity adder at 1( 0) + 0 on 3277;
+  architecture a_adder of adder at 13( 243) + 0 on 3278;
+file . "ULA/ula.vhd" "631be483c2cdfcb00ba3ece843c4d5644b6ad736" "20240524181757.884":
+  entity ula at 1( 0) + 0 on 3279;
+  architecture a_ula of ula at 15( 318) + 0 on 3280;
+file . "ULA/and_op.vhd" "57a7653912c434fb3bed53a3f21b34ce5350cc1d" "20240524181757.856":
+  entity and_op at 1( 0) + 0 on 3271;
+  architecture a_and_op of and_op at 13( 243) + 0 on 3272;
+file . "ULA/xor_op.vhd" "07bb78e3a83389890a3510f212571a28a270c744" "20240524181757.868":
+  entity xor_op at 1( 0) + 0 on 3275;
+  architecture a_xor_op of xor_op at 14( 243) + 0 on 3276;
+file . "Register_Bank/reg_bd.vhd" "cff899b0056e6a49e0fde1fbbbc6efacb9852f3b" "20240524181758.159":
+  entity reg_bd at 1( 0) + 0 on 3285;
+  architecture a_reg_bd of reg_bd at 23( 558) + 0 on 3286;
 file . "top_level_tb.vhd" "b5e3c938dd79d8487dffd7cc87d269bb3911f6aa" "20240516013001.060":
   entity top_level_tb at 1( 0) + 0 on 3121;
   architecture a_top_level_tb of top_level_tb at 8( 106) + 0 on 3122;
-file . "Register_Bank/reg_bd.vhd" "cff899b0056e6a49e0fde1fbbbc6efacb9852f3b" "20240516013000.863":
-  entity reg_bd at 1( 0) + 0 on 3113;
-  architecture a_reg_bd of reg_bd at 23( 558) + 0 on 3114;
-file . "ULA/xor_op.vhd" "07bb78e3a83389890a3510f212571a28a270c744" "20240516013000.585":
-  entity xor_op at 1( 0) + 0 on 3103;
-  architecture a_xor_op of xor_op at 14( 243) + 0 on 3104;
-file . "ULA/and_op.vhd" "57a7653912c434fb3bed53a3f21b34ce5350cc1d" "20240516013000.573":
-  entity and_op at 1( 0) + 0 on 3099;
-  architecture a_and_op of and_op at 13( 243) + 0 on 3100;
-file . "ULA/ula.vhd" "631be483c2cdfcb00ba3ece843c4d5644b6ad736" "20240516013000.598":
-  entity ula at 1( 0) + 0 on 3107;
-  architecture a_ula of ula at 15( 318) + 0 on 3108;
-file . "ULA/adder.vhd" "6853c005e46e80d6f85b739ef0e847e7bfc4d9fa" "20240516013000.592":
-  entity adder at 1( 0) + 0 on 3105;
-  architecture a_adder of adder at 13( 243) + 0 on 3106;
-file . "ULA/subtracter.vhd" "b54870fc15101a5fc9539b697b1aba9befce43bd" "20240516013000.577":
-  entity subtracter at 1( 0) + 0 on 3101;
-  architecture a_subtracter of subtracter at 13( 248) + 0 on 3102;
-file . "top_level.vhd" "14761ed4c783b501bd708816edf9c2ee4da3759a" "20240516012304.224":
-  entity top_level at 1( 0) + 0 on 3095;
-  architecture a_top_level of top_level at 21( 335) + 0 on 3096;
-file . "utils/registrator_16.vhd" "da84781be81b9b1d80c20c6cb6f98e1fafe0dae4" "20240516013000.857":
-  entity registrator_16 at 1( 0) + 0 on 3111;
-  architecture a_registrator_16 of registrator_16 at 15( 296) + 0 on 3112;
-file . "utils/three_state_machine.vhd" "22f257918f865b93aef00883ac85977369b5d008" "20240516013000.937":
-  entity three_state_machine at 1( 0) + 0 on 3115;
-  architecture a_three_state_machine of three_state_machine at 9( 191) + 0 on 3116;
-file . "ROM/rom.vhd" "046854734ab9b2f358d1d2372a6781c889935461" "20240516013000.791":
-  entity rom at 1( 0) + 0 on 3109;
-  architecture a_rom of rom at 13( 223) + 0 on 3110;
-file . "Control/proto_control.vhd" "44d5aba70184295ee2ac4f477451ebb71889b7ba" "20240516013001.011":
-  entity proto_control at 1( 0) + 0 on 3119;
-  architecture proto_control of proto_control at 16( 354) + 0 on 3120;
+file . "utils/registrator_7.vhd" "db21d39f7775bf7ef682fac94b8dc5e911aa261d" "20240524181758.235":
+  entity registrator_7 at 1( 0) + 0 on 3289;
+  architecture a_registrator_7 of registrator_7 at 15( 293) + 0 on 3290;
+file . "processador_tb.vhd" "6d8821a2a7f6bd232605d686ff7e3bf6e7a30254" "20240524181758.418":
+  entity processador_tb at 1( 0) + 0 on 3295;
+  architecture a_processador_tb of processador_tb at 8( 108) + 0 on 3296;
