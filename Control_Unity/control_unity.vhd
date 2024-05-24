@@ -8,8 +8,15 @@ use ieee.numeric_std.all;
 entity control_unity is 
     port (
         clk, rst: in std_logic;
-        flag1_in: in std_logic; 
-        flag1_out: in std_logic;
+
+        flag_zero_in: in std_logic; 
+        flag_zero_out: out std_logic;
+        
+        flag_overflow_in: in std_logic; 
+        flag_overflow_out: out std_logic;
+   
+        flag_carry_in: in std_logic; 
+        flag_carry_out: out std_logic  
     );
 end entity;
 
@@ -24,5 +31,7 @@ component registrator_1 is
     );
 end component;
 begin
-    flag1: registrator_1 port map (clk => clk, rst => rst, wr_en => '1', data_in => flag1_in, data_out => flag1_out);
+    flag_zero: registrator_1 port map (clk => clk, rst => rst, wr_en => '1', data_in => flag_zero_in, data_out => flag_zero_out);
+    flag_overflow: registrator_1 port map (clk => clk, rst => rst, wr_en => '1', data_in => flag_overflow_in, data_out => flag_overflow_out);
+    flag_carry: registrator_1 port map (clk => clk, rst => rst, wr_en => '1', data_in => flag_carry_in, data_out => flag_carry_out);
 end a_control_unity;

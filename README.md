@@ -7,6 +7,7 @@ Instruções OBRIGATÓRIAS a serem usadas na sua validação:
  - 'Acumulador ou não': 'ULA com acumulador',
  - 'Carga de constantes': 'Carrega diretamente com LD sem somar',
  - 'Comparações': 'CMP presente',
+   - Nota Thomas: Não salvar operação feita para CMP 
  - 'Flags obrigatórias': ['Overflow', 'Zero', 'Carry'],
  - 'SUB ctes': 'SUB apenas entre registradores',
  - 'SUB ops': 'SUB com dois operandos apenas',
