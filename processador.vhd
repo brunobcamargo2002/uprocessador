@@ -61,7 +61,7 @@ architecture a_processador of processador is
         wr_en: in std_logic;
         data_out: out unsigned(15 downto 0);
         estado: in unsigned(1 downto 0);
-        is_branch: in std_logic;
+        is_branch, is_relative_branch: in std_logic;
         branch_address: in unsigned(6 downto 0)
     );
     end component;
@@ -125,7 +125,7 @@ architecture a_processador of processador is
 
     -- proto_control signals
     signal data_out_proto_control : unsigned (15 downto 0);
-    signal is_branch_s : std_logic;
+    signal is_branch_s, is_relative_branch_s : std_logic;
     signal branch_address_s : unsigned (6 downto 0);
     signal wr_en_proto_control : std_logic;
 
@@ -185,6 +185,7 @@ begin
         data_out => data_out_proto_control,
         estado => estado_s,
         is_branch => is_branch_s,
+        is_relative_branch => is_relative_branch_s,
         branch_address => branch_address_s
     );
 
@@ -221,7 +222,8 @@ begin
     -- proto_control
     wr_en_proto_control <= '1' when estado_s = "10";
     branch_address_s <= data_out_instruction_reg(11 downto 5);
-    is_branch_s <= '1' when opcode = "1000" or 
+    is_branch_s <= '1' when opcode = "1000" else '0';
+    is_relative_branch_s <= '1' when 
         (opcode = "1001" and flag_zero_out_ctr = '1') or 
         (opcode = "1010" and flag_overflow_out_ctr = '1') or 
         (opcode = "1011" and flag_carry_out_ctr = '1')

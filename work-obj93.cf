@@ -1,46 +1,46 @@
 v 4
-file . "utils/registrator_1.vhd" "5bbd8cbc23fbaafb75528b9cc81bef060a2e478c" "20240529214220.167":
-  entity registrator_1 at 1( 0) + 0 on 731;
-  architecture a_registrator_1 of registrator_1 at 15( 271) + 0 on 732;
-file . "processador_tb.vhd" "d3a365ddf974870b9302a48e7a00573c11c32128" "20240529214220.550":
-  entity processador_tb at 1( 0) + 0 on 739;
-  architecture a_processador_tb of processador_tb at 8( 108) + 0 on 740;
-file . "Control/proto_control.vhd" "5254064ed320f0fa4a18250ecd3d05ec5861421e" "20240529214220.375":
-  entity proto_control at 1( 0) + 0 on 733;
-  architecture proto_control of proto_control at 17( 355) + 0 on 734;
-file . "utils/three_state_machine.vhd" "22f257918f865b93aef00883ac85977369b5d008" "20240529214220.152":
-  entity three_state_machine at 1( 0) + 0 on 727;
-  architecture a_three_state_machine of three_state_machine at 9( 191) + 0 on 728;
-file . "utils/registrator_16.vhd" "da84781be81b9b1d80c20c6cb6f98e1fafe0dae4" "20240529214220.107":
-  entity registrator_16 at 1( 0) + 0 on 723;
-  architecture a_registrator_16 of registrator_16 at 15( 296) + 0 on 724;
-file . "ULA/ula.vhd" "51af55d17c0f795fcd0478ea8297374e6a0d1baa" "20240529214219.760":
-  entity ula at 1( 0) + 0 on 719;
-  architecture a_ula of ula at 17( 393) + 0 on 720;
-file . "ULA/xor_op.vhd" "07bb78e3a83389890a3510f212571a28a270c744" "20240529214219.744":
-  entity xor_op at 1( 0) + 0 on 715;
-  architecture a_xor_op of xor_op at 14( 243) + 0 on 716;
-file . "ULA/and_op.vhd" "57a7653912c434fb3bed53a3f21b34ce5350cc1d" "20240529214219.725":
-  entity and_op at 1( 0) + 0 on 711;
-  architecture a_and_op of and_op at 13( 243) + 0 on 712;
-file . "ULA/subtracter.vhd" "cb8edbd7cf70cbbee12e4ef4227903e5f2560bd6" "20240529214219.735":
-  entity subtracter at 1( 0) + 0 on 713;
-  architecture a_subtracter of subtracter at 13( 248) + 0 on 714;
-file . "ULA/adder.vhd" "94bcbf838f23f0dcf1a3ca42d15225ac557d30df" "20240529214219.751":
-  entity adder at 1( 0) + 0 on 717;
-  architecture a_adder of adder at 13( 243) + 0 on 718;
-file . "ROM/rom.vhd" "0b5dad516e2b6de50ac3b9d571a8b8f7bf9a5190" "20240529214220.071":
-  entity rom at 1( 0) + 0 on 721;
-  architecture a_rom of rom at 13( 223) + 0 on 722;
-file . "Register_Bank/reg_bd.vhd" "cff899b0056e6a49e0fde1fbbbc6efacb9852f3b" "20240529214220.112":
-  entity reg_bd at 1( 0) + 0 on 725;
-  architecture a_reg_bd of reg_bd at 23( 558) + 0 on 726;
-file . "utils/registrator_7.vhd" "db21d39f7775bf7ef682fac94b8dc5e911aa261d" "20240529214220.161":
-  entity registrator_7 at 1( 0) + 0 on 729;
-  architecture a_registrator_7 of registrator_7 at 15( 293) + 0 on 730;
-file . "processador.vhd" "192f0a65865cff03e9a3e87e73d11756c187c7af" "20240529214220.491":
-  entity processador at 1( 0) + 0 on 737;
-  architecture a_processador of processador at 29( 495) + 0 on 738;
-file . "Control_Unity/control_unity.vhd" "1f589b465295cc64230220bab342d89822a8db09" "20240529214220.422":
-  entity control_unity at 1( 0) + 0 on 735;
-  architecture a_control_unity of control_unity at 25( 512) + 0 on 736;
+file . "Control_Unity/control_unity.vhd" "1f589b465295cc64230220bab342d89822a8db09" "20240529215216.643":
+  entity control_unity at 1( 0) + 0 on 905;
+  architecture a_control_unity of control_unity at 25( 512) + 0 on 906;
+file . "processador.vhd" "e01f3a244a8644b06ade8bfa1f8c5524b1056b53" "20240529215216.688":
+  entity processador at 1( 0) + 0 on 907;
+  architecture a_processador of processador at 29( 495) + 0 on 908;
+file . "utils/registrator_7.vhd" "db21d39f7775bf7ef682fac94b8dc5e911aa261d" "20240529215216.445":
+  entity registrator_7 at 1( 0) + 0 on 899;
+  architecture a_registrator_7 of registrator_7 at 15( 293) + 0 on 900;
+file . "Register_Bank/reg_bd.vhd" "cff899b0056e6a49e0fde1fbbbc6efacb9852f3b" "20240529215216.353":
+  entity reg_bd at 1( 0) + 0 on 895;
+  architecture a_reg_bd of reg_bd at 23( 558) + 0 on 896;
+file . "ROM/rom.vhd" "2a3ade554b558cb0d85c6de4930ab6137266e437" "20240529215216.294":
+  entity rom at 1( 0) + 0 on 891;
+  architecture a_rom of rom at 13( 223) + 0 on 892;
+file . "ULA/adder.vhd" "94bcbf838f23f0dcf1a3ca42d15225ac557d30df" "20240529215216.121":
+  entity adder at 1( 0) + 0 on 887;
+  architecture a_adder of adder at 13( 243) + 0 on 888;
+file . "ULA/subtracter.vhd" "cb8edbd7cf70cbbee12e4ef4227903e5f2560bd6" "20240529215216.111":
+  entity subtracter at 1( 0) + 0 on 883;
+  architecture a_subtracter of subtracter at 13( 248) + 0 on 884;
+file . "ULA/and_op.vhd" "57a7653912c434fb3bed53a3f21b34ce5350cc1d" "20240529215216.106":
+  entity and_op at 1( 0) + 0 on 881;
+  architecture a_and_op of and_op at 13( 243) + 0 on 882;
+file . "ULA/xor_op.vhd" "07bb78e3a83389890a3510f212571a28a270c744" "20240529215216.116":
+  entity xor_op at 1( 0) + 0 on 885;
+  architecture a_xor_op of xor_op at 14( 243) + 0 on 886;
+file . "ULA/ula.vhd" "51af55d17c0f795fcd0478ea8297374e6a0d1baa" "20240529215216.126":
+  entity ula at 1( 0) + 0 on 889;
+  architecture a_ula of ula at 17( 393) + 0 on 890;
+file . "utils/registrator_16.vhd" "da84781be81b9b1d80c20c6cb6f98e1fafe0dae4" "20240529215216.337":
+  entity registrator_16 at 1( 0) + 0 on 893;
+  architecture a_registrator_16 of registrator_16 at 15( 296) + 0 on 894;
+file . "utils/three_state_machine.vhd" "22f257918f865b93aef00883ac85977369b5d008" "20240529215216.439":
+  entity three_state_machine at 1( 0) + 0 on 897;
+  architecture a_three_state_machine of three_state_machine at 9( 191) + 0 on 898;
+file . "Control/proto_control.vhd" "061e8d6ae426811714353c6767fb45cc05c85b82" "20240529215216.597":
+  entity proto_control at 1( 0) + 0 on 903;
+  architecture proto_control of proto_control at 17( 375) + 0 on 904;
+file . "processador_tb.vhd" "d3a365ddf974870b9302a48e7a00573c11c32128" "20240529215216.755":
+  entity processador_tb at 1( 0) + 0 on 909;
+  architecture a_processador_tb of processador_tb at 8( 108) + 0 on 910;
+file . "utils/registrator_1.vhd" "5bbd8cbc23fbaafb75528b9cc81bef060a2e478c" "20240529215216.454":
+  entity registrator_1 at 1( 0) + 0 on 901;
+  architecture a_registrator_1 of registrator_1 at 15( 271) + 0 on 902;

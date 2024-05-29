@@ -6,7 +6,7 @@ entity proto_control is
     port (
         clk, rst: in std_logic;
         wr_en: in std_logic;
-        is_branch: in std_logic;
+        is_branch, is_relative_branch: in std_logic;
         branch_address: in unsigned(6 downto 0);
         estado: in unsigned(1 downto 0);
         data_out: out unsigned(15 downto 0)
@@ -47,7 +47,9 @@ begin
     --estado <= estado_s;
     estado_s <= estado;
 
-    new_address <= branch_address when is_branch = '1' else data_out_pc+1;
+    new_address <= branch_address when is_branch = '1' else 
+        data_out_pc + branch_address when is_relative_branch = '1' else 
+        data_out_pc + 1;
     data_in_pc <= new_address when estado_s = "10" else data_out_pc;
     address_rom <= data_out_pc when estado_s = "00";
   
