@@ -253,7 +253,9 @@ begin
         regA_data_out; -- when estado_s = "01";-- when opcode = "0010" or opcode = "0100"
 
     -- Control Unity (flags)
-    wr_en_flags_ctr => '1' when opcode = ""
+    wr_en_flags_ctr => '1' when (opcode = "0010" or opcode = "0011" or 
+        opcode = "0100" or opcode = "0101") else '0'; -- escrever somente quando tem operações na ula
+
     
 
     --Wires
