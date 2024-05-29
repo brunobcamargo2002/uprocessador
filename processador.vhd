@@ -221,7 +221,11 @@ begin
     -- proto_control
     wr_en_proto_control <= '1' when estado_s = "10";
     branch_address_s <= data_out_instruction_reg(11 downto 5);
-    is_branch_s <= '1' when opcode = "1000" else '0';
+    is_branch_s <= '1' when opcode = "1000" or 
+        (opcode = "1001" and flag_zero_out_ctr = '1') or 
+        (opcode = "1010" and flag_overflow_out_ctr = '1') or 
+        (opcode = "1011" and flag_carry_out_ctr = '1')
+         else '0';
 
     -- reg_bank
     write_register_s <= data_out_instruction_reg(11 downto 9);
