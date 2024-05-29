@@ -64,6 +64,23 @@ architecture a_processador of processador is
     );
     end component;
 
+    component control_unity is 
+    port (
+        clk, rst: in std_logic;
+        
+        flag_zero_in: in std_logic;
+        flag_zero_out: out std_logic;
+        
+        flag_overflow_in: in std_logic; 
+        flag_overflow_out: out std_logic;
+   
+        flag_carry_in: in std_logic; 
+        flag_carry_out: out std_logic;
+
+        wr_enable_flags: in std_logic
+    );
+    end component;
+
     component three_state_machine is
         port( clk,rst: in std_logic;
               estado: out unsigned(1 downto 0)
@@ -108,6 +125,12 @@ architecture a_processador of processador is
     signal is_branch_s : std_logic;
     signal branch_address_s : unsigned (6 downto 0);
     signal wr_en_proto_control : std_logic;
+
+    -- Control Unity signals
+    signal flag_zero_in_ctr, flag_zero_out_ctr : std_logic;
+    signal flag_overflow_in_ctr, flag_overflow_out_ctr : std_logic; 
+    signal flag_carry_in_ctr, flag_carry_out_ctr : std_logic; 
+    signal wr_en_flags_ctr : std_logic;
 
     -- 3 state machine signals
     signal estado_s : unsigned (1 downto 0);
@@ -159,11 +182,29 @@ begin
         branch_address => branch_address_s
     );
 
+    control_unity_1 : control_unity port map (
+        clk => clk,
+        rst => rst,
+
+        flag_zero_in => flag_zero_in_ctr;
+        flag_zero_out => flag_zero_out_ctr;
+        
+        flag_overflow_in:  flag_overflow_in_ctr; 
+        flag_overflow_out:  flag_overflow_out_ctr;
+   
+        flag_carry_in:  flag_carry_in_ctr; 
+        flag_carry_out:  flag_carry_out_ctr;
+        
+        wr_enable_flags: wr_en_flags_ctr;
+    );
+    
     three_state_machine_1 : three_state_machine port map (
         clk => clk,
         rst => rst,
         estado => estado_s
     );
+
+
 
     opcode <= data_out_instruction_reg(15 downto 12);
 
@@ -211,6 +252,9 @@ begin
     in_b <= "0000000" & const when (opcode = "0011" or opcode = "0101") else -- and estado_s = "01" else
         regA_data_out; -- when estado_s = "01";-- when opcode = "0010" or opcode = "0100"
 
+    -- Control Unity (flags)
+    wr_en_flags_ctr => '1' when opcode = ""
+    
 
     --Wires
     estado_out <= estado_s;
