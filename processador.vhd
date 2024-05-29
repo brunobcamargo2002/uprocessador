@@ -64,11 +64,20 @@ architecture a_processador of processador is
     );
     end component;
 
-    component three_state_machine is
-        port( clk,rst: in std_logic;
-              estado: out unsigned(1 downto 0)
-        );
-     end component;
+    component control_unity is 
+    port (
+        clk, rst: in std_logic;
+
+        flag_zero_in: in std_logic; 
+        flag_zero_out: out std_logic;
+        
+        flag_overflow_in: in std_logic; 
+        flag_overflow_out: out std_logic;
+   
+        flag_carry_in: in std_logic; 
+        flag_carry_out: out std_logic  
+    );
+    end component;
 
     component registrator_16 is 
     port(
@@ -149,6 +158,14 @@ begin
         data_out => data_out_accumulator
     );
 
+    control_unity_1 : control_unity port map (
+        clk => clk,
+        rst => rst,
+        instruction_in => data_out_instruction_reg,
+        -- verificar se isso funciona
+        
+    )
+
     proto_control_1 : proto_control port map (
         clk => clk,
         rst => rst,
@@ -159,11 +176,7 @@ begin
         branch_address => branch_address_s
     );
 
-    three_state_machine_1 : three_state_machine port map (
-        clk => clk,
-        rst => rst,
-        estado => estado_s
-    );
+
 
     opcode <= data_out_instruction_reg(15 downto 12);
 
