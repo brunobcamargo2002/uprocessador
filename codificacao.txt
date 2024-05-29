@@ -33,3 +33,15 @@ MOVR: 0111 wwwx xxxx xxxx
 BRA: 1000 aaaa aaax xxxx
     aaa aaaa: Instrução da ROM para realizar o salto
     x: irrelevante
+
+JZ: 1001 aaaa aaax xxxx -- Jump Zero
+aaa aaaa: instrução da rom para realizar o salto
+x: irrelevante
+
+JC: 1010 aaaa aaax xxxx -- Jump Carry
+aaa aaaa: instrução da rom para realizar o salto
+x: irrelevante
+
+JO: 1011 aaaa aaax xxxx -- Jump Overflow
+aaa aaaa: instrução da rom para realizar o salto
+x: irrelevante
