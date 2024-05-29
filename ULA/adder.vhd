@@ -12,5 +12,5 @@ end entity;
 
 architecture a_adder of adder is
 begin
-    result <= '0'&in_a + '0'&in_b;
+    result <= ('0' & in_a) + ('0' & in_b);
 end architecture;

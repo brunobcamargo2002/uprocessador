@@ -26,13 +26,19 @@ ghdl -e reg_bd
 #Utils
 ghdl -a utils/three_state_machine.vhd
 ghdl -a utils/registrator_7.vhd
+ghdl -a utils/registrator_1.vhd
 
 ghdl -e three_state_machine
 ghdl -e registrator_7
+ghdl -e registrator_1
 
 #Control
 ghdl -a Control/proto_control.vhd
 ghdl -e proto_control
+
+#Control Unity
+ghdl -a Control_Unity/control_unity.vhd
+ghdl -e control_unity
 
 #TopLevel
 ghdl -a processador.vhd

@@ -10,7 +10,7 @@ entity ula is
         ULAout : out unsigned(15 downto 0);
         zero_flag: out std_logic;
         overflow_flag: out std_logic;
-        carry_flag: out std_logic;
+        carry_flag: out std_logic
     );
 end entity;
 
@@ -48,8 +48,8 @@ architecture a_ula of ula is
         );
     end component;
 
-    signal result_adder, result_subtracter, result_and, result_xor: unsigned(15 downto 0);
-    signal final_result : unsigned(16 downto 0);
+    signal result_and, result_xor: unsigned(15 downto 0);
+    signal result_subtracter, result_adder, final_result : unsigned(16 downto 0);
 begin
     adder1: adder port map(in_a=>in_a, in_b=>in_b, result=>result_adder);
     subtracter1: subtracter port map(in_a=>in_a, in_b=>in_b, result=>result_subtracter);
