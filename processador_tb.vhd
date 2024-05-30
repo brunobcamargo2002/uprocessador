@@ -2,22 +2,29 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity top_level_tb is
+entity processador_tb is
 end entity;
 
-architecture a_top_level_tb of top_level_tb is
+architecture a_processador_tb of processador_tb is
     
-    component top_level
+    component processador
         port (
             clk, rst: in std_logic;
-            --operation: in unsigned (1 downto 0);
-            --read_0, read_1, write_register: in unsigned(2 downto 0);
-            --wr_en: in std_logic;
-            --cte: in unsigned(15 downto 0);
-            --mux_2: in std_logic;
+
+            ----wires----
+            estado_out : out unsigned(1 downto 0);
+        
+            pc_out : out unsigned(15 downto 0);
+        
+            instruction_reg_out : out unsigned(15 downto 0);
+        
+            acumulador_out : out unsigned(15 downto 0);
+        
+            --ULA wires
             ULA_out: out unsigned (15 downto 0);
-            zero_flag: out std_logic;
-            r0, r1, r2, r3, r4, r5, r6, r7: out unsigned(15 downto 0) 
+        
+            --RB wires
+            r0, r1, r2, r3, r4, r5, r6, r7: out unsigned(15 downto 0)
         );
     end component; 
     --ULA
@@ -44,7 +51,7 @@ architecture a_top_level_tb of top_level_tb is
     
 
 begin 
-    tp_lvl: top_level port map(clk => clk,
+    tp_lvl: processador port map(clk => clk,
     rst => rst,
     --operation => operation,
     --read_0 => read_0,
@@ -54,7 +61,6 @@ begin
     --cte => cte,
     --mux_2 => mux_2,
     ULA_out => ULA_out,
-    zero_flag => zero_flag,
     r0 => r0, r1 => r1, r2 => r2, r3 => r3, 
     r4 => r4, r5 => r5, r6 => r6, r7 => r7
     );
@@ -71,7 +77,7 @@ begin
         
         sim_time_proc: process
         begin
-            wait for 4 us;         -- <== TEMPO TOTAL DA SIMULAÇÃO!!!
+            wait for 6 us;         -- <== TEMPO TOTAL DA SIMULAÇÃO!!!
             finished <= '1';
             wait;
         end process sim_time_proc;

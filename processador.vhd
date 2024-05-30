@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity top_level is
+entity processador is
     port(
     clk, rst: in std_logic;
 
@@ -26,14 +26,16 @@ entity top_level is
 
 end entity;
 
-architecture a_top_level of top_level is
+architecture a_processador of processador is
     component ula
         port (
             operation : in unsigned(1 downto 0);
             in_a : in unsigned(15 downto 0);
             in_b : in unsigned(15 downto 0);
             ULAout : out unsigned(15 downto 0);
-            is_zero: out std_logic
+            zero_flag: out std_logic;
+            overflow_flag: out std_logic;
+            carry_flag: out std_logic
         );
     end component;
 
@@ -59,8 +61,25 @@ architecture a_top_level of top_level is
         wr_en: in std_logic;
         data_out: out unsigned(15 downto 0);
         estado: in unsigned(1 downto 0);
-        is_branch: in std_logic;
+        is_branch, is_relative_branch: in std_logic;
         branch_address: in unsigned(6 downto 0)
+    );
+    end component;
+
+    component control_unity is 
+    port (
+        clk, rst: in std_logic;
+        
+        flag_zero_in: in std_logic;
+        flag_zero_out: out std_logic;
+        
+        flag_overflow_in: in std_logic; 
+        flag_overflow_out: out std_logic;
+   
+        flag_carry_in: in std_logic; 
+        flag_carry_out: out std_logic;
+
+        wr_enable_flags: in std_logic
     );
     end component;
 
@@ -82,9 +101,10 @@ architecture a_top_level of top_level is
 
 
     --ULA signals
-    signal in_a, in_b, ULAout : unsigned(15 downto 0);
+    signal in_a, in_b, ULAout_s : unsigned(15 downto 0);
     signal is_zero : std_logic;
     signal operation_ula : unsigned(1 downto 0);
+    signal zero_flag_s, overflow_flag_s, carry_flag_s : std_logic;
 
 
     --Register Bank signals
@@ -105,9 +125,15 @@ architecture a_top_level of top_level is
 
     -- proto_control signals
     signal data_out_proto_control : unsigned (15 downto 0);
-    signal is_branch_s : std_logic;
+    signal is_branch_s, is_relative_branch_s : std_logic;
     signal branch_address_s : unsigned (6 downto 0);
     signal wr_en_proto_control : std_logic;
+
+    -- Control Unity signals
+    signal flag_zero_in_ctr, flag_zero_out_ctr : std_logic;
+    signal flag_overflow_in_ctr, flag_overflow_out_ctr : std_logic; 
+    signal flag_carry_in_ctr, flag_carry_out_ctr : std_logic; 
+    signal wr_en_flags_ctr : std_logic;
 
     -- 3 state machine signals
     signal estado_s : unsigned (1 downto 0);
@@ -117,8 +143,11 @@ begin
     ula_1: ula port map ( operation => operation_ula, 
         in_a => in_a, 
         in_b => in_b,
-        ULAout => ULAout,
-        is_zero => is_zero);
+        ULAout => ULAout_s,
+        zero_flag => zero_flag_s,
+        overflow_flag => overflow_flag_s,
+        carry_flag => carry_flag_s
+    );
 
     reg_bd_1: reg_bd port map(read_r0 => rA_address,--read_0, 
     read_r1 => rB_address,--read_1, 
@@ -156,14 +185,33 @@ begin
         data_out => data_out_proto_control,
         estado => estado_s,
         is_branch => is_branch_s,
+        is_relative_branch => is_relative_branch_s,
         branch_address => branch_address_s
     );
 
+    control_unity_1 : control_unity port map (
+        clk => clk,
+        rst => rst,
+
+        flag_zero_in => zero_flag_s,
+        flag_zero_out => flag_zero_out_ctr,
+        
+        flag_overflow_in => overflow_flag_s, 
+        flag_overflow_out => flag_overflow_out_ctr,
+   
+        flag_carry_in => carry_flag_s, 
+        flag_carry_out => flag_carry_out_ctr,
+        
+        wr_enable_flags => wr_en_flags_ctr
+    );
+    
     three_state_machine_1 : three_state_machine port map (
         clk => clk,
         rst => rst,
         estado => estado_s
     );
+
+
 
     opcode <= data_out_instruction_reg(15 downto 12);
 
@@ -175,6 +223,11 @@ begin
     wr_en_proto_control <= '1' when estado_s = "10";
     branch_address_s <= data_out_instruction_reg(11 downto 5);
     is_branch_s <= '1' when opcode = "1000" else '0';
+    is_relative_branch_s <= '1' when 
+        (opcode = "1001" and flag_zero_out_ctr = '1') or 
+        (opcode = "1010" and flag_overflow_out_ctr = '1') or 
+        (opcode = "1011" and flag_carry_out_ctr = '1')
+         else '0';
 
     -- reg_bank
     write_register_s <= data_out_instruction_reg(11 downto 9);
@@ -186,7 +239,7 @@ begin
         "0000000" & data_out_instruction_reg(8 downto 0);
 
     -- ULA
-    data_in_accumulator <= regA_data_out when opcode = "0110" else ULAOut;
+    data_in_accumulator <= regA_data_out when opcode = "0110" else ULAOut_s;
     in_a <= data_out_accumulator;
 
     -- accumulator
@@ -211,11 +264,14 @@ begin
     in_b <= "0000000" & const when (opcode = "0011" or opcode = "0101") else -- and estado_s = "01" else
         regA_data_out; -- when estado_s = "01";-- when opcode = "0010" or opcode = "0100"
 
+    -- Control Unity (flags)
+    wr_en_flags_ctr <= '1' when (opcode = "0010" or opcode = "0011" or 
+        opcode = "0100" or opcode = "0101") and estado_s = "10" else '0'; -- escrever somente quando tem operações na ula
+    
 
     --Wires
     estado_out <= estado_s;
-    ULA_out <= ULAout;
-    zero_flag <= is_zero;
+    ULA_out <= ULAout_s;
     pc_out <= data_out_proto_control;
     instruction_reg_out <= data_out_instruction_reg;
     acumulador_out <= data_out_accumulator;
