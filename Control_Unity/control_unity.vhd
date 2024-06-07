@@ -32,8 +32,11 @@ component registrator_1 is
         data_out: out std_logic
     );
 end component;
+    signal not_clk : std_logic;
 begin
-    flag_zero: registrator_1 port map (clk => clk, rst => rst, wr_en => wr_enable_flags, data_in => flag_zero_in, data_out => flag_zero_out);
-    flag_overflow: registrator_1 port map (clk => clk, rst => rst, wr_en => wr_enable_flags, data_in => flag_overflow_in, data_out => flag_overflow_out);
-    flag_carry: registrator_1 port map (clk => clk, rst => rst, wr_en => wr_enable_flags, data_in => flag_carry_in, data_out => flag_carry_out);
+    not_clk <= not clk;
+
+    flag_zero: registrator_1 port map (clk => not_clk, rst => rst, wr_en => wr_enable_flags, data_in => flag_zero_in, data_out => flag_zero_out);
+    flag_overflow: registrator_1 port map (clk => not_clk, rst => rst, wr_en => wr_enable_flags, data_in => flag_overflow_in, data_out => flag_overflow_out);
+    flag_carry: registrator_1 port map (clk => not_clk, rst => rst, wr_en => wr_enable_flags, data_in => flag_carry_in, data_out => flag_carry_out);
 end a_control_unity;

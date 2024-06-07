@@ -97,6 +97,10 @@ begin
 
        process                      -- sinais dos casos de teste (p.ex.)
        begin
+        --Carrega R3 (o registrador 3) com o valor 0
+        
+
+
         wait;
        end process;
 
