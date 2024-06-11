@@ -1,14 +1,14 @@
 #ULA
-ghdl -a ULA/and_op.vhd
+#ghdl -a ULA/and_op.vhd
 ghdl -a ULA/subtracter.vhd
-ghdl -a ULA/xor_op.vhd
+# ghdl -a ULA/xor_op.vhd
 ghdl -a ULA/adder.vhd
 ghdl -a ULA/ula.vhd
 
 ghdl -e adder
-ghdl -e and_op
+# ghdl -e and_op
 ghdl -e subtracter
-ghdl -e xor_op
+# ghdl -e xor_op
 ghdl -e ula
 
 #ROM

@@ -77,7 +77,7 @@ begin
         
         sim_time_proc: process
         begin
-            wait for 6 us;         -- <== TEMPO TOTAL DA SIMULAÇÃO!!!
+            wait for 60 us;         -- <== TEMPO TOTAL DA SIMULAÇÃO!!!
             finished <= '1';
             wait;
         end process sim_time_proc;
@@ -97,6 +97,10 @@ begin
 
        process                      -- sinais dos casos de teste (p.ex.)
        begin
+        --Carrega R3 (o registrador 3) com o valor 0
+        
+
+
         wait;
        end process;
 
