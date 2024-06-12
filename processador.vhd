@@ -98,6 +98,16 @@ architecture a_processador of processador is
         data_out: out unsigned(15 downto 0)
     );
     end component;
+    
+    component ram is
+    port( 
+        clk      : in std_logic;
+        endereco : in unsigned(6 downto 0);
+        wr_en    : in std_logic;
+        dado_in  : in unsigned(15 downto 0);
+        dado_out : out unsigned(15 downto 0) 
+    );
+    end component;
 
 
     --ULA signals
@@ -211,6 +221,14 @@ begin
         estado => estado_s
     );
 
+    ram_1 : ram port map (
+        clk => clk,
+        endereco => endereco_ram,
+        wr_en => wr_en_ram,
+        dado_in => dado_in_ram,
+        dado_out => dado_out_ram
+    );
+
 
 
     opcode <= data_out_instruction_reg(15 downto 12);
@@ -232,7 +250,6 @@ begin
     -- reg_bank
     write_register_s <= data_out_instruction_reg(11 downto 9);
     rA_address <= data_out_instruction_reg(8 downto 6);
-    --rB_address <= data_out_instruction_reg(5 downto 3);
     const <= data_out_instruction_reg(8 downto 0);
     
     write_data_s <= data_out_accumulator when opcode = "0111" else
