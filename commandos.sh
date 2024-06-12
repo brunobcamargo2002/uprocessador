@@ -11,6 +11,10 @@ ghdl -e subtracter
 # ghdl -e xor_op
 ghdl -e ula
 
+#RAM
+ghdl -a RAM/ram.vhd
+ghdl -e ram
+
 #ROM
 ghdl -a ROM/rom.vhd
 ghdl -e rom

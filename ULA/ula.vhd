@@ -64,7 +64,7 @@ begin
     ULAout <= final_result(15 downto 0);
 
     zero_flag <= '1' when final_result(15 downto 0) = x"0000" else '0';
-    overflow_flag <= '1' when in_a(15) = '0' and in_b(15)='0' and final_result(15)='1' else '0';
+    overflow_flag <= '1' when (in_a(15) = '0' and in_b(15)='0' and final_result(15)='1') or (in_a(15) = '1' and in_b(15)='1' and final_result(15)='0') else '0';
     carry_flag <= '1' when final_result(16) = '1' else '0';
 end architecture;
 

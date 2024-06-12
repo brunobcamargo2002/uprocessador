@@ -148,6 +148,12 @@ architecture a_processador of processador is
     -- 3 state machine signals
     signal estado_s : unsigned (1 downto 0);
 
+    -- RAM
+    signal endereco_ram: unsigned(6 downto 0);
+    signal wr_en_ram: std_logic;
+    signal dado_in_ram: unsigned(15 downto 0);
+    signal dado_out_ram: unsigned(15 downto 0);
+
 begin 
     
     ula_1: ula port map ( operation => operation_ula, 
@@ -213,6 +219,8 @@ begin
         flag_carry_out => flag_carry_out_ctr,
         
         wr_enable_flags => wr_en_flags_ctr
+
+        
     );
     
     three_state_machine_1 : three_state_machine port map (
@@ -252,12 +260,18 @@ begin
     rA_address <= data_out_instruction_reg(8 downto 6);
     const <= data_out_instruction_reg(8 downto 0);
     
-    write_data_s <= data_out_accumulator when opcode = "0111" else
-        "0000000" & data_out_instruction_reg(8 downto 0);
+    write_data_s <= data_out_accumulator when opcode = "0111" else 
+    dado_out_ram when opcode = "1100" else
+    "0000000" & data_out_instruction_reg(8 downto 0);
 
     -- ULA
     data_in_accumulator <= regA_data_out when opcode = "0110" else ULAOut_s;
     in_a <= data_out_accumulator;
+
+    --RAM
+    endereco_ram <= data_out_accumulator(6 downto 0);
+
+
 
     -- accumulator
     --wr_en_accumulator <= '1' when estado_s = "10" else '0';
@@ -265,7 +279,7 @@ begin
         opcode = "0001" or opcode = "0111" or opcode = "1000" else '1';
 
     
-    wr_en_s <= '1' when (opcode = "0001" or opcode = "0111") and estado_s = "01" else '0';
+    wr_en_s <= '1' when (opcode = "0001" or opcode = "0111" or opcode = "1100") and estado_s = "01" else '0';
     -- opcode "0001" = LD
     -- opcode "0010" = ADD
     -- opcode "0011" = ADDI
@@ -274,6 +288,8 @@ begin
     -- opcode "0110" = MOVA
     -- opcode "0111" = MOVR
     -- opcode "1000" = BRA
+    -- opcode "1100" = LW 
+    -- opcode "1101" = RW
 
     -- ULA
     operation_ula <= "00" when opcode = "0010" or opcode = "0011" else

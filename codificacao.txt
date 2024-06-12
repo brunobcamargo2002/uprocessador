@@ -46,6 +46,7 @@ JC: 1011 aaaa aaax xxxx -- Jump Carry
     aaa aaaa: instrução da rom para realizar o salto
     x: irrelevante
 
-LW: 1100 -- Load Word (Carregar instrução da ROM)
-
+LW: 1100 aaax xxxx xxxx  -- Load Word (Carregar instrução da ROM)
+    aaa: Endereço do registrador que será escrito
+    bbb: Endereço do registrador que contém o endereço
 RW: 1101 -- Read Word (Ler instrução da ROM)
