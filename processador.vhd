@@ -270,8 +270,8 @@ begin
 
     --RAM
     endereco_ram <= data_out_accumulator(6 downto 0);
-
-
+    dado_in_ram <= regA_data_out(15 downto 0);
+    wr_en_ram <= '1' when (opcode = "1101" and estado_s = "10") else '0';
 
     -- accumulator
     --wr_en_accumulator <= '1' when estado_s = "10" else '0';
