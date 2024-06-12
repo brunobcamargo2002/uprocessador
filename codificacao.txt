@@ -45,3 +45,4 @@ x: irrelevante
 JC: 1011 aaaa aaax xxxx -- Jump Carry
 aaa aaaa: instrução da rom para realizar o salto
 x: irrelevante
+
