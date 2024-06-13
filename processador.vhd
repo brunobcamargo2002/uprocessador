@@ -276,7 +276,7 @@ begin
     -- accumulator
     --wr_en_accumulator <= '1' when estado_s = "10" else '0';
     wr_en_accumulator <= '0' when estado_s = "00" or estado_s = "01" or
-        opcode = "0001" or opcode = "0111" or opcode = "1000" else '1';
+        opcode = "0001" or opcode = "0111" or opcode = "1000" or opcode = "1100" or opcode = "1101" else '1';
 
     
     wr_en_s <= '1' when (opcode = "0001" or opcode = "0111" or opcode = "1100") and estado_s = "01" else '0';
