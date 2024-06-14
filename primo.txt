@@ -1,0 +1,48 @@
+-- * Inserir números da RAM * --
+
+-- r2 = quantidade de números para preencher
+-- r1 = "iterador"
+
+ld r1, 1
+ld r2, 32
+mva r1
+addi 1
+mvr r1
+lw r1
+mva r2
+sub r1
+jc -8
+
+ld r1, 2
+mva r1
+
+-- * Multiplicação * --
+
+-- r1 = operando 1
+-- r3 = limite
+-- r4 = resultado
+
+ld r1, 2
+ld r3, 32
+
+mva r1
+addi 1
+rw r2
+mva r2
+add r0
+jz -4
+
+0 1 2 3 4 5 6
+0 1 1 1 0 1 0 
+
+ld r4, 0
+
+mva r4
+lw r0
+mra r4
+add r1
+mvr r4
+sub r3
+jc -6
+bra 33
+
