@@ -6,7 +6,7 @@ Instruções OBRIGATÓRIAS a serem usadas na sua validação:
  - [x] 'ADD ops': 'ADD com dois operandos apenas',
  - [x] 'Acumulador ou não': 'ULA com acumulador',
  - [x] 'Carga de constantes': 'Carrega diretamente com LD sem somar',
- - [ ] 'Comparações': 'CMP presente',
+ - [x] 'Comparações': 'CMP presente',
     - Nota Thomas: Não salvar operação feita para CMP 
  - [x] 'Flags obrigatórias': ['Overflow', 'Zero', 'Carry'],
  - [x] 'SUB ctes': 'SUB apenas entre registradores',
