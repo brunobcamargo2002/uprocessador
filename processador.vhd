@@ -176,7 +176,7 @@ begin
     read_data0 => regA_data_out, 
     read_data1 => regB_data_out,
     --wires
-    r0 => r0, r2 => r2, r3 => r3, r4 => r4, r5 => r5, r6 => r6, r7 => r7);
+    r0 => r0, r1 => r1, r2 => r2, r3 => r3, r4 => r4, r5 => r5, r6 => r6, r7 => r7);
 
     instruction_reg : registrator_16 port map (
         clk => clk,
@@ -276,7 +276,7 @@ begin
     -- accumulator
     --wr_en_accumulator <= '1' when estado_s = "10" else '0';
     wr_en_accumulator <= '0' when estado_s = "00" or estado_s = "01" or
-        opcode = "0001" or opcode = "0111" or opcode = "1000" or opcode = "1100" or opcode = "1101" else '1';
+        opcode = "0001" or opcode = "0111" or opcode = "1000" or opcode = "1100" or opcode = "1101" or opcode = "1110" else '1';
 
     
     wr_en_s <= '1' when (opcode = "0001" or opcode = "0111" or opcode = "1100") and estado_s = "01" else '0';
@@ -290,6 +290,7 @@ begin
     -- opcode "1000" = BRA
     -- opcode "1100" = LW 
     -- opcode "1101" = RW
+    -- opcode "1110" = CMP
 
     -- ULA
     operation_ula <= "00" when opcode = "0010" or opcode = "0011" else
@@ -299,7 +300,7 @@ begin
 
     -- Control Unity (flags)
     wr_en_flags_ctr <= '1' when (opcode = "0010" or opcode = "0011" or 
-        opcode = "0100" or opcode = "0101") and estado_s = "10" else '0'; -- escrever somente quando tem operações na ula
+        opcode = "0100" or opcode = "0101" or opcode = "1110") and estado_s = "10" else '0'; -- escrever somente quando tem operações na ula
     
 
     --Wires

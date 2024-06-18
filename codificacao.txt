@@ -53,3 +53,6 @@ RW: 1101 xxxa aaxx xxxx -- Read Word (Ler valor da RAM)
     aaa: Valor a ser escrito na RAM
     x: irrelevante
 
+CMP: 1110 xxxa aaxx xxxx
+    aaa: Endereço do registrador que será parte da subtração
+    x: irrelevante
