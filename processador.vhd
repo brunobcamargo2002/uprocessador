@@ -300,7 +300,7 @@ begin
 
     -- Control Unity (flags)
     wr_en_flags_ctr <= '1' when (opcode = "0010" or opcode = "0011" or 
-        opcode = "0100" or opcode = "0101" or opcode = "1110") and estado_s = "10" else '0'; -- escrever somente quando tem operações na ula
+        opcode = "0100" or opcode = "0101" or opcode = "1110" or opcode = "1111") and estado_s = "10" else '0'; -- escrever somente quando tem operações na ula
     
 
     --Wires
