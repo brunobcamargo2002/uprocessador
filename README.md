@@ -14,4 +14,4 @@ Instruções OBRIGATÓRIAS a serem usadas na sua validação:
  - [x] 'Saltos': 'Incondicional é absoluto e condicional é relativo',
  - [x] 'Subtração': 'SUB sem borrow',
  - [ ] 'Validação -- complicações': 'Indicar, ao final, em debug_bit, se 19563 é ''primo ou não',
- - [ ] 'Validação -- final do loop': 'Detecção do MSB setado usando OR'
+ - [x] 'Validação -- final do loop': 'Detecção do MSB setado usando OR'

@@ -102,7 +102,7 @@ architecture a_processador of processador is
     component ram is
     port( 
         clk      : in std_logic;
-        endereco : in unsigned(6 downto 0);
+        endereco : in unsigned(15 downto 0);
         wr_en    : in std_logic;
         dado_in  : in unsigned(15 downto 0);
         dado_out : out unsigned(15 downto 0) 
@@ -149,7 +149,7 @@ architecture a_processador of processador is
     signal estado_s : unsigned (1 downto 0);
 
     -- RAM
-    signal endereco_ram: unsigned(6 downto 0);
+    signal endereco_ram: unsigned(15 downto 0);
     signal wr_en_ram: std_logic;
     signal dado_in_ram: unsigned(15 downto 0);
     signal dado_out_ram: unsigned(15 downto 0);
@@ -269,7 +269,7 @@ begin
     in_a <= data_out_accumulator;
 
     --RAM
-    endereco_ram <= data_out_accumulator(6 downto 0);
+    endereco_ram <= data_out_accumulator(15 downto 0);
     dado_in_ram <= regA_data_out(15 downto 0);
     wr_en_ram <= '1' when (opcode = "1101" and estado_s = "10") else '0';
 
