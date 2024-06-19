@@ -57,6 +57,6 @@ CMP: 1110 xxxa aaxx xxxx
     aaa: Endereço do registrador que será parte da subtração
     x: irrelevante
 
-OR: 1111 xxxs aaxx xxxx
+OR: 1111 xxxa aaxx xxxx
     aaa: Endereço do registrador que será parte da operação or 
     x: irrelevante
