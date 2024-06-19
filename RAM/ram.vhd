@@ -13,7 +13,7 @@ entity ram is
 end entity;
 ------------------------------------------------------------------------
 architecture a_ram of ram is
-   type mem is array (0 to 127) of unsigned(15 downto 0);
+   type mem is array (0 to 32767) of unsigned(15 downto 0);
    signal conteudo_ram : mem :=(
         0 => B"0001_011_000000000",
         1 => B"0001_100_000000000", 

@@ -56,3 +56,7 @@ RW: 1101 xxxa aaxx xxxx -- Read Word (Ler valor da RAM)
 CMP: 1110 xxxa aaxx xxxx
     aaa: Endereço do registrador que será parte da subtração
     x: irrelevante
+
+OR: 1111 xxxs aaxx xxxx
+    aaa: Endereço do registrador que será parte da operação or 
+    x: irrelevante

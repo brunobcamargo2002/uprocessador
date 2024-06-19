@@ -293,7 +293,7 @@ begin
     -- opcode "1110" = CMP
 
     -- ULA
-    operation_ula <= "00" when opcode = "0010" or opcode = "0011" else
+    operation_ula <= "00" when opcode = "0010" or opcode = "0011" else "11" when opcode = "1111" else
         "01";
     in_b <= "0000000" & const when (opcode = "0011" or opcode = "0101") else -- and estado_s = "01" else
         regA_data_out; -- when estado_s = "01";-- when opcode = "0010" or opcode = "0100"

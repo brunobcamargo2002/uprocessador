@@ -32,14 +32,6 @@ architecture a_ula of ula is
         );
     end component;
 
-    component xor_op is
-        port(
-            in_a : in unsigned(15 downto 0);
-            in_b : in unsigned(15 downto 0);
-            result : out unsigned(15 downto 0)
-        );
-    end component;
-
     component and_op is
         port(
             in_a : in unsigned(15 downto 0);
@@ -55,11 +47,11 @@ begin
     subtracter1: subtracter port map(in_a=>in_a, in_b=>in_b, result=>result_subtracter);
     --multiplicator1: multiplicator port map(in_a=>in_a, in_b=>in_b, result=>result_multiplicator);
     and_op1: and_op port map(in_a=>in_a, in_b=>in_b, result=>result_xor);
-    xor_op1: xor_op port map(in_a=>in_a, in_b=>in_b, result=>result_xor);
+    -- xor_op1: xor_op port map(in_a=>in_a, in_b=>in_b, result=>result_xor);
     final_result <= result_adder when operation="00" else
              result_subtracter when operation="01" else
              '0' & result_and when operation="10" else
-             '0' & result_xor when operation="11" else
+             '0' & (in_a or in_b) when operation="11" else
              "00000000000000000";
     ULAout <= final_result(15 downto 0);
 
