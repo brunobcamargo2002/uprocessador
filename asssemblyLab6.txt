@@ -1,0 +1,43 @@
+A. Carrega R3 (o registrador 3) com o valor 0
+B. Carrega R4 com 0
+C. Soma R3 com R4 e guarda em R4
+D. Soma 1 em R3
+E. Se R3<30 salta para a instrução do passo C *
+F. Copia valor de R4 para R5
+
+LD R3, 0 --A
+LD R4, 0 --B
+MOVA R0 --C
+ADD R3
+ADD R4
+MOVR R4
+MOVA R0 
+ADDI 1 --D
+ADD R3
+MOVR R3
+MOVA R3 --E
+SUBI 30
+JC -10
+MOVA R4 --F
+MOVR R5
+
+
+
+    constant content: mem :=(
+        0 => B"0001_011_000000000", -- A 
+        1 => B"0001_100_000000000", -- B
+        2 => B"0110_000_000_000000", -- C
+        3 => B"0010_000_011_000000",
+        4 => B"0010_000_100_000000",
+        5 => B"0111_100_000_000000", 
+        6 => B"0110_000_000_000000", -- zera acumulador
+        7 => B"0011_000_000000001", -- /D
+        8 => B"0010_000_011_000000",
+        9 => B"0111_011_000_000000",
+        10 => B"0110_000_011_011110", -- E
+        11 => B"0101_000_000011110",
+        12 => B"1011_1110110_00000", 
+        13 => B"0110_000_100_000000", --F
+        14 => B"0111_101_000_000000",
+        others => (others=>'0')
+    );

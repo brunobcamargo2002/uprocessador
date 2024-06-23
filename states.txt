@@ -1,0 +1,9 @@
+00
+    Ler ROM
+01
+    Ler ou rescrever REGs
+10
+    Incrementar PC
+    Escrever Acc
+    Escrever RAM
+

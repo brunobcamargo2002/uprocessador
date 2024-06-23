@@ -1,0 +1,10 @@
+v 4
+file . "registrator_16.vhd" "da84781be81b9b1d80c20c6cb6f98e1fafe0dae4" "20240513001855.063":
+  entity registrator_16 at 1( 0) + 0 on 17;
+  architecture a_registrator_16 of registrator_16 at 15( 296) + 0 on 18;
+file . "one_state_machine.vhd" "2e8f11176b7ab013380718d550749f616ca97052" "20240513001854.957":
+  entity one_state_machine at 1( 0) + 0 on 13;
+  architecture a_one_state_machine of one_state_machine at 13( 212) + 0 on 14;
+file . "registrator_7.vhd" "db21d39f7775bf7ef682fac94b8dc5e911aa261d" "20240513001855.028":
+  entity registrator_7 at 1( 0) + 0 on 15;
+  architecture a_registrator_7 of registrator_7 at 15( 293) + 0 on 16;
